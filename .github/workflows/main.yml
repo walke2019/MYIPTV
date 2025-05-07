@@ -155,5 +155,5 @@ jobs:
             
             # 设置新的远程URL并推送
             git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-            git push origin HEAD:main
+            git push -f origin HEAD:main
           fi
