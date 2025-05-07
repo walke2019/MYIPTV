@@ -1,5 +1,5 @@
 更新时间,#genre#
-20250508 02:45:14,https://gitee.com/kabigo/tv/raw/master/assets/about1080p.mp4
+20250508 04:38:25,https://cdn.jsdelivr.net/gh/walke2019/MYIPTV@main/output/ad/ad.mp4
 
 🍄湖南频道#genre#
 湖南都市,http://110.53.218.182:9902/tsfile/live/0127_1.m3u8
@@ -1498,7 +1498,7 @@ CCTV-1,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=8469&tk=a0c4f6cfaba3
 CCTV-1,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=1705&tk=a0c4f6cfaba3
 CCTV-1,http://tv.20191209.xyz:37377/migu/608807420.m3u8?migutoken=004b385f879c68b1898b3b528c53ce2cc69a05fc6ccef397d5ff725950f98cc37983a6c0565ab535a964de0b80663b3a394fd8a43c51d0547d2e232162525de45bdb07292d1fc1944aea97f0
 CCTV-1,https://cd-live-stream.news.cctvplus.com/live/smil:CHANNEL1.smil/playlist.m3u8
-CCTV-1,http://api.mytv666.top/api/migu.php?id=CCTV1综合&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-1,http://api.mytv666.top/api/migu.php?id=CCTV1综合&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-1,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=484&token=QQ群1039308194
 CCTV-1,http://goo.bkpcp.top/mg/cctv1
 CCTV-1,http://z.b.bkpcp.top/m.php?id=cctv1
@@ -1939,7 +1939,7 @@ CCTV-2,http://home.kuaidi521.com:35455/gaoma/cctv2.m3u8
 CCTV-2,http://227w9f5104.zicp.fun:35455/gaoma/cctv2.m3u8
 CCTV-2,http://huashetou.fun:35455/gaoma/cctv2.m3u8
 CCTV-2,https://cd-live-stream.news.cctvplus.com/live/smil:CHANNEL2.smil/playlist.m3u8
-CCTV-2,http://api.mytv666.top/api/migu.php?id=CCTV2财经&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-2,http://api.mytv666.top/api/migu.php?id=CCTV2财经&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-2,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=485&token=QQ群1039308194
 CCTV-2,http://goo.bkpcp.top/mg/cctv2
 CCTV-2,http://z.b.bkpcp.top/m.php?id=cctv2
@@ -2381,7 +2381,7 @@ CCTV-3,http://58.210.168.86:10800/newlive/live/hls/3/live.m3u8
 CCTV-3,http://101.66.198.193:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=0&authid=0
 CCTV-3,rtsp://60.13.39.18/PLTV/88888910/224/3221225598/10000100000000060000000000295671_0.smil
 CCTV-3,http://huashetou.fun:35455/gaoma/cctv3.m3u8
-CCTV-3,http://api.mytv666.top/api/migu.php?id=CCTV3综艺&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-3,http://api.mytv666.top/api/migu.php?id=CCTV3综艺&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-3,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=486&token=QQ群1039308194
 CCTV-3,http://221.226.215.162:352/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-3,http://goo.bkpcp.top/mg/cctv3
@@ -2898,9 +2898,9 @@ CCTV-4,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=7406&tk=e503191f8e20
 CCTV-4,https://stream1.freetv.fun/cctv4k-2.ctv
 CCTV-4,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=9460&tk=b53028476470
 CCTV-4,http://dl.wifi942.com:66/jsyd/jsyd.php?id=G_CCTV-4K-HD
-CCTV-4,http://api.mytv666.top/api/migu.php?id=CCTV4中文国际&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
-CCTV-4,http://api.mytv666.top/api/migu.php?id=CCTV4欧洲&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
-CCTV-4,http://api.mytv666.top/api/migu.php?id=CCTV4美洲&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-4,http://api.mytv666.top/api/migu.php?id=CCTV4中文国际&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
+CCTV-4,http://api.mytv666.top/api/migu.php?id=CCTV4欧洲&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
+CCTV-4,http://api.mytv666.top/api/migu.php?id=CCTV4美洲&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-4,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=487&token=QQ群1039308194
 CCTV-4,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=501&token=QQ群1039308194
 CCTV-4,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=502&token=QQ群1039308194
@@ -3652,8 +3652,8 @@ CCTV-5+,http://112.81.218.254:35455/gaoma/cctv5p.m3u8
 CCTV-5+,http://60.219.176.250:9003//hls/118/index.m3u8
 CCTV-5+,http://huashetou.fun:35455/gaoma/cctv5p.m3u8
 CCTV-5+,http://227w9f5104.zicp.fun:35455/gaoma/cctv5p.m3u8
-CCTV-5+,http://api.mytv666.top/api/migu.php?id=CCTV5体育&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
-CCTV-5+,http://api.mytv666.top/api/migu.php?id=CCTV5 体育赛事&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-5+,http://api.mytv666.top/api/migu.php?id=CCTV5体育&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
+CCTV-5+,http://api.mytv666.top/api/migu.php?id=CCTV5 体育赛事&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-5+,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=488&token=QQ群1039308194
 CCTV-5+,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=489&token=QQ群1039308194
 CCTV-5+,http://223.241.247.214:9901/tsfile/live/0005_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -4110,7 +4110,7 @@ CCTV-6,http://101.66.198.193:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=0&
 CCTV-6,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=8574&tk=a0c4f6cfaba3
 CCTV-6,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=3744&tk=a0c4f6cfaba3
 CCTV-6,http://tv.20191209.xyz:37377/migu/624878396.m3u8?migutoken=14b6f481c50ac947cd74bf4b212c490bc99f4bebefd4ce18011c9eb269208a0ce9740af370135e855763df734bac8f57f36721ae54b6afc81829420e84f46c65a2de80938b057c6ec23459eb
-CCTV-6,http://api.mytv666.top/api/migu.php?id=CCTV6电影&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-6,http://api.mytv666.top/api/migu.php?id=CCTV6电影&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-6,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=490&token=QQ群1039308194
 CCTV-6,http://goo.bkpcp.top/mg/cctv6
 CCTV-6,http://z.b.bkpcp.top/m.php?id=cctv6
@@ -4514,7 +4514,7 @@ CCTV-7,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=7670&tk=a0c4f6cfaba3
 CCTV-7,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=1038&tk=a0c4f6cfaba3
 CCTV-7,http://xiaoya.crccxw.top:35455/gaoma/cctv7.m3u8
 CCTV-7,http://huashetou.fun:35455/gaoma/cctv7.m3u8
-CCTV-7,http://api.mytv666.top/api/migu.php?id=CCTV7国防军事&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-7,http://api.mytv666.top/api/migu.php?id=CCTV7国防军事&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-7,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=491&token=QQ群1039308194
 CCTV-7,http://223.241.247.214:9901/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-7,http://221.226.215.162:352/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -4956,7 +4956,7 @@ CCTV-8,http://125.82.168.238:8888/rtp/235.254.198.144:1856
 CCTV-8,http://lt.hxtre.com:35455/gaoma/cctv8.m3u8
 CCTV-8,http://xiaoya.crccxw.top:35455/gaoma/cctv8k_36m.m3u8
 CCTV-8,http://3501776.xyz:35455/gaoma/cctv8k_36m.m3u8
-CCTV-8,http://api.mytv666.top/api/migu.php?id=CCTV8电视剧&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-8,http://api.mytv666.top/api/migu.php?id=CCTV8电视剧&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-8,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=492&token=QQ群1039308194
 CCTV-8,http://221.226.215.162:352/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-8,http://58.213.65.146:352/tsfile/live/0008_1.m3u8?key=txiptv
@@ -5382,7 +5382,7 @@ CCTV-9,http://114.252.238.87:8000/udp/239.3.1.62:8112
 CCTV-9,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=6790&tk=a0c4f6cfaba3
 CCTV-9,http://www.douzhicloud.site:35455/gaoma/cctv9.m3u8
 CCTV-9,http://huashetou.fun:35455/gaoma/cctv9.m3u8
-CCTV-9,http://api.mytv666.top/api/migu.php?id=CCTV9纪录&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-9,http://api.mytv666.top/api/migu.php?id=CCTV9纪录&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-9,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=493&token=QQ群1039308194
 CCTV-9,http://221.226.215.162:352/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-9,http://goo.bkpcp.top/mg/cctv9
@@ -5825,7 +5825,7 @@ CCTV-10,http://home.kuaidi521.com:35455/gaoma/cctv10.m3u8
 CCTV-10,http://lt.hxtre.com:35455/gaoma/cctv10.m3u8
 CCTV-10,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0958&tk=a0c4f6cfaba3
 CCTV-10,http://112.81.218.254:35455/gaoma/cctv10.m3u8
-CCTV-10,http://api.mytv666.top/api/migu.php?id=CCTV10科教&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-10,http://api.mytv666.top/api/migu.php?id=CCTV10科教&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-10,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=494&token=QQ群1039308194
 CCTV-10,http://goo.bkpcp.top/mg/cctv10
 CCTV-10,http://z.b.bkpcp.top/m.php?id=cctv10
@@ -6217,7 +6217,7 @@ CCTV-11,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0188&tk=e503191f8e20
 CCTV-11,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0353&tk=e640d0a1bf70
 CCTV-11,rtsp://180.95.143.19/PLTV/88888910/224/3221225501/10000100000000060000000000107281_0.smil
 CCTV-11,rtsp://221.7.61.147/PLTV/88888910/224/3221225501/10000100000000060000000000107281_0.smil
-CCTV-11,http://api.mytv666.top/api/migu.php?id=CCTV11戏曲&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-11,http://api.mytv666.top/api/migu.php?id=CCTV11戏曲&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-11,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=495&token=QQ群1039308194
 CCTV-11,http://223.241.247.214:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-11,http://58.213.65.146:352/tsfile/live/0011_1.m3u8?key=txiptv
@@ -6652,7 +6652,7 @@ CCTV-12,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0874&tk=a0c4f6cfaba3
 CCTV-12,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0338&tk=a0c4f6cfaba3
 CCTV-12,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0384&tk=b53028476470
 CCTV-12,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0390&tk=f6cc1e0a0e1a
-CCTV-12,http://api.mytv666.top/api/migu.php?id=CCTV12社会与法&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-12,http://api.mytv666.top/api/migu.php?id=CCTV12社会与法&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-12,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=496&token=QQ群1039308194
 CCTV-12,http://223.241.247.214:9901/tsfile/live/0012_1.m3u8
 CCTV-12,http://goo.bkpcp.top/mg/cctv12
@@ -7074,7 +7074,7 @@ CCTV-13,http://101.66.198.193:9901/tsfile/live/0013_1.m3u8?key=txiptv&playlive=0
 CCTV-13,http://119.32.12.32:2901/udp/224.1.100.69:11111
 CCTV-13,http://121.11.160.7:9901/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-13,http://huashetou.fun:35455/gaoma/cctv13.m3u8
-CCTV-13,http://api.mytv666.top/api/migu.php?id=CCTV13新闻&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-13,http://api.mytv666.top/api/migu.php?id=CCTV13新闻&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-13,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=497&token=QQ群1039308194
 CCTV-13,http://58.213.65.146:352/tsfile/live/0013_1.m3u8?key=txiptv
 CCTV-13,http://ak6668768.zicp.io:8812/live1013.m3u8
@@ -7486,7 +7486,7 @@ CCTV-14,http://lt.hxtre.com:35455/gaoma/cctv14.m3u8
 CCTV-14,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=1234&tk=e503191f8e20
 CCTV-14,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0183&tk=e640d0a1bf70
 CCTV-14,rtsp://221.7.61.147/PLTV/88888910/224/3221225504/10000100000000060000000000107284_0.smil
-CCTV-14,http://api.mytv666.top/api/migu.php?id=CCTV14少儿&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-14,http://api.mytv666.top/api/migu.php?id=CCTV14少儿&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-14,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=498&token=QQ群1039308194
 CCTV-14,http://223.241.247.214:9901/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-14,http://221.226.215.162:352/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -7875,7 +7875,7 @@ CCTV-15,http://101.66.198.255:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=0
 CCTV-15,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0057&tk=aa0698566417
 CCTV-15,http://101.66.198.193:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=0&authid=0
 CCTV-15,http://home.kuaidi521.com:35455/gaoma/cctv15.m3u8
-CCTV-15,http://api.mytv666.top/api/migu.php?id=CCTV15音乐&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-15,http://api.mytv666.top/api/migu.php?id=CCTV15音乐&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-15,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=499&token=QQ群1039308194
 CCTV-15,http://222.134.245.16:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0
 CCTV-15,http://223.241.247.214:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -8090,7 +8090,7 @@ CCTV-16,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0943&tk=b53028476470
 CCTV-16,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0356&tk=f6cc1e0a0e1a
 CCTV-16,rtsp://221.7.61.147/PLTV/88888910/224/3221225605/10000100000000060000000000566169_0.smil
 CCTV-16,http://huashetou.fun:35455/gaoma/cctv16.m3u8
-CCTV-16,http://api.mytv666.top/api/migu.php?id=CCTV-16奥利匹克&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-16,http://api.mytv666.top/api/migu.php?id=CCTV-16奥利匹克&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-16,http://139.129.231.228/rtp/239.21.2.51:5002
 CCTV-16,http://39.134.67.108/PLTV/88888888/224/3221225893/1.m3u8
 CCTV-16,http://39.134.65.173/PLTV/88888888/224/3221225893/1.m3u8
@@ -8370,7 +8370,7 @@ CCTV-17,http://227w9f5104.zicp.fun:35455/gaoma/cctv17.m3u8
 CCTV-17,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=0240&tk=a0c4f6cfaba3
 CCTV-17,http://huashetou.fun:35455/gaoma/cctv17.m3u8
 CCTV-17,http://lt.hxtre.com:35455/gaoma/cctv17.m3u8
-CCTV-17,http://api.mytv666.top/api/migu.php?id=CCTV17农业农村&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CCTV-17,http://api.mytv666.top/api/migu.php?id=CCTV17农业农村&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CCTV-17,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=500&token=QQ群1039308194
 CCTV-17,http://goo.bkpcp.top/mg/cctv17
 CCTV-17,http://z.b.bkpcp.top/m.php?id=cctv17
@@ -8395,7 +8395,7 @@ CCTV-17,http://103.70.13.229:20035/api.php?id=63029&tk=f78057ba50f41fa55d
 CCTV-17,http://PLTV/ku9/js/bjyd.js?a=3221226459&b=W_3n8Mtxag8Sub9AT2mZng&QUN=酷9JS交流群424765458
 CCTV-17,webview://https://yangshipin.cn/tv/home?pid=600001810
 CCTV-17,webview://https://tv.cctv.com/live/cctv17/
-CETV1,http://api.mytv666.top/api/migu.php?id=CETV1&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CETV1,http://api.mytv666.top/api/migu.php?id=CETV1&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CETV1,http://120.198.95.220:9901/tsfile/live/1039_1.m3u8?key=txiptv
 CETV1,http://player.cntv.cn/standard/live_HLSDRM20180524.swf?ChannelID=cetv1&videoTVChannel=cetv1&P2PChannelID=pd://cctv_p2p_hdcetv1&tai=cetv1&VideoName=cetv1&channelID=cetv1
 CETV1,http://139.129.231.228/rtp/239.21.2.7:5002
@@ -8407,7 +8407,7 @@ CETV1,rtsp://115.153.233.154/PLTV/88888888/224/3221226858/63768493.smil
 CETV1,http://139.129.231.228:50060/rtp/239.21.2.7:5002
 CETV1,http://111.43.126.240:9003/hls/34/index.m3u8
 CETV1,http://183.11.239.36:808/hls/122/index.m3u8
-CETV2,http://api.mytv666.top/api/migu.php?id=CETV2&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CETV2,http://api.mytv666.top/api/migu.php?id=CETV2&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CETV2,http://player.cntv.cn/standard/live_HLSDRM20180524.swf?ChannelID=cetv2&videoTVChannel=cetv2&P2PChannelID=pd://cctv_p2p_hdcetv2&tai=cetv2&VideoName=cetv2&channelID=cetv2
 CETV2,http://139.129.231.228/rtp/239.21.2.8:5002
 CETV2,https://piccpndali.v.myalicdn.com/audio/cetv2_2.m3u8
@@ -8417,7 +8417,7 @@ CETV2,rtsp://115.153.212.72/PLTV/88888888/224/3221226978/85722625.smil
 CETV2,rtsp://115.153.233.154/PLTV/88888888/224/3221226978/85722625.smil
 CETV2,http://139.129.231.228:50060/rtp/239.21.2.8:5002
 CETV2,http://183.11.239.36:808/hls/78/index.m3u8
-CETV4,http://api.mytv666.top/api/migu.php?id=CETV4&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+CETV4,http://api.mytv666.top/api/migu.php?id=CETV4&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 CETV4,http://player.cntv.cn/standard/live_HLSDRM20180524.swf?ChannelID=cetv4&videoTVChannel=cetv4&P2PChannelID=pd://cctv_p2p_hdcetv4&tai=cetv4&VideoName=cetv4&channelID=cetv4
 CETV4,http://139.129.231.228/rtp/239.21.1.222:5002
 CETV4,https://piccpndali.v.myalicdn.com/audio/cetv4_2.m3u8
@@ -8803,7 +8803,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 东方卫视,http://116.117.106.103:8096/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0
 东方卫视,http://218.13.170.98:9901/tsfile/live/1010_1.m3u8
 东方卫视,http://113.218.229.47:8081/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0
-东方卫视,http://api.mytv666.top/api/migu.php?id=东方卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+东方卫视,http://api.mytv666.top/api/migu.php?id=东方卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 东方卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=503&token=QQ群1039308194
 东方卫视,http://223.241.247.214:9901/tsfile/live/1005_1.m3u8?key=txiptv&playlive=1&authid=0
 东方卫视,http://221.226.215.162:352/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -9978,7 +9978,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 江苏卫视,rtsp://115.85.232.19/PLTV/88888910/224/3221225569/10000100000000060000000000107349_0.smil
 江苏卫视,rtsp://60.13.39.19/PLTV/88888910/224/3221225569/10000100000000060000000000107349_0.smil
 江苏卫视,http://60.172.130.146:352/tsfile/live/0127_1.m3u8?key=txiptv&playlive=1&authid=0
-江苏卫视,http://api.mytv666.top/api/migu.php?id=江苏卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+江苏卫视,http://api.mytv666.top/api/migu.php?id=江苏卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 江苏卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=505&token=QQ群1039308194
 江苏卫视,http://221.226.215.162:352/tsfile/live/0127_1.m3u8?key=txiptv&playlive=1&authid=0
 江苏卫视,http://58.213.65.146:352/tsfile/live/0127_1.m3u8?key=txiptv
@@ -10378,7 +10378,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 广东卫视,http://58.210.168.86:10800/newlive/live/hls/25/live.m3u8
 广东卫视,http://110.53.52.63:8888/newlive/live/hls/20/live.m3u8
 广东卫视,rtsp://180.95.143.19/PLTV/88888910/224/3221225527/10000100000000060000000000107307_0.smil
-广东卫视,http://api.mytv666.top/api/migu.php?id=广东卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+广东卫视,http://api.mytv666.top/api/migu.php?id=广东卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 广东卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=504&token=QQ群1039308194
 广东卫视,http://221.226.215.162:352/tsfile/live/0125_1.m3u8?key=txiptv&playlive=1&authid=0#rtsp://221.7.61.147/PLTV/88888910/224/3221225527/10000100000000060000000000107307_0.smil
 广东卫视,http://z.b.bkpcp.top/m.php?id=gdws
@@ -11535,7 +11535,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 湖北卫视,http://113.25.252.226:9901/tsfile/live/0132_1.m3u8
 湖北卫视,http://58.210.168.86:10800/newlive/live/hls/35/live.m3u8
 湖北卫视,http://119.36.148.115:59901/tsfile/live/0132_1.m3u8
-湖北卫视,http://api.mytv666.top/api/migu.php?id=湖北卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+湖北卫视,http://api.mytv666.top/api/migu.php?id=湖北卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 湖北卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=510&token=QQ群1039308194
 湖北卫视,http://223.241.247.214:9901/tsfile/live/0132_1.m3u8?key=txiptv&playlive=1&authid=0
 湖北卫视,http://221.226.215.162:352/tsfile/live/0132_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -13966,7 +13966,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 海南卫视,http://live.wqwqwq.sbs/itv/5000000004000006211.m3u8?cdn=bestzb
 海南卫视,rtsp://116.176.26.19/PLTV/88888910/224/3221225556/10000100000000060000000000107336_0.smil
 海南卫视,rtsp://180.95.143.19/PLTV/88888910/224/3221225556/10000100000000060000000000107336_0.smil
-海南卫视,http://api.mytv666.top/api/migu.php?id=海南卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+海南卫视,http://api.mytv666.top/api/migu.php?id=海南卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 海南卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=506&token=QQ群1039308194
 海南卫视,http://goo.bkpcp.top/mg/hinws
 海南卫视,http://z.b.bkpcp.top/m.php?id=hinws
@@ -14610,7 +14610,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 河南卫视,http://www.xzbn.site:35455/itv/1000000002000027731.m3u8?cdn=ystenlive
 河南卫视,http://tv.20191209.xyz:37377/migu/790187291.m3u8?migutoken=086ba6ec3f6268d44a6979043b9df04cccad70c2a183e6b46cc15be2d0bd40d33e0be32880248cf8d79ddcf04a82560af19d8d9cc76b700a59be26618056a02a5f822c76fe3ed7f3e0b81c94
 河南卫视,http://101.66.198.193:9901/tsfile/live/0139_1.m3u8?key=txiptv&playlive=0&authid=0
-河南卫视,http://api.mytv666.top/api/migu.php?id=河南卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+河南卫视,http://api.mytv666.top/api/migu.php?id=河南卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 河南卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=522&token=QQ群1039308194
 河南卫视,http://223.241.247.214:9901/tsfile/live/0139_1.m3u8?key=txiptv&playlive=1&authid=0
 河南卫视,http://221.226.215.162:352/tsfile/live/0139_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -14913,7 +14913,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 吉林卫视,http://b.zgjok.com:35455/itv/1000000002000027730.m3u8?cdn=ystenlive&Contentid=1000000002000027730
 吉林卫视,http://110.7.131.231:9901/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0
 吉林卫视,http://113.57.20.158:9901/tsfile/live/1007_1.m3u8
-吉林卫视,http://api.mytv666.top/api/migu.php?id=吉林卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+吉林卫视,http://api.mytv666.top/api/migu.php?id=吉林卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 吉林卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=507&token=QQ群1039308194
 吉林卫视,http://223.241.247.214:9901/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0
 吉林卫视,http://221.226.215.162:352/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -15290,7 +15290,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 江西卫视,http://kkk.jjjj.jiduo.me/api.php?n=tttt&id=1303&tk=aa0698566417
 江西卫视,http://1.195.30.9:19901/tsfile/live/0138_1.m3u8?key=txiptv&playlive=1&authid=0
 江西卫视,http://59.39.89.130:60901/tsfile/live/0125_10.m3u8?key=txiptv&playlive=1&authid=0
-江西卫视,http://api.mytv666.top/api/migu.php?id=江西卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+江西卫视,http://api.mytv666.top/api/migu.php?id=江西卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 江西卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=508&token=QQ群1039308194
 江西卫视,http://223.241.247.214:9901/tsfile/live/0138_1.m3u8#rtsp://60.13.39.19/PLTV/88888910/224/3221225541/10000100000000060000000000107321_0.smil#rtsp://180.95.143.19/PLTV/88888910/224/3221225541/10000100000000060000000000107321_0.smil
 江西卫视,http://221.226.215.162:352/tsfile/live/0138_1.m3u8?key=txiptv&playlive=1&authid=0
@@ -16468,7 +16468,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 青海卫视,https://stream1.freetv.fun/qing-hai-wei-shi-31.m3u8
 青海卫视,http://113.57.20.158:9901/tsfile/live/1014_1.m3u8?key=txiptv&playlive=1&authid=0
 青海卫视,https://www.freetv.top/migu/947472506.m3u8?migutoken=7bfff5cd40297ac2c258f598f97f36a47e8d0d19763d61ff6f62aff98021e7fcafa9b64df934c1ca76302e804fb60ce17856d30a33b7965613665d25cce09f43302170684a7e39c85290af3bd3
-青海卫视,http://api.mytv666.top/api/migu.php?id=青海卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+青海卫视,http://api.mytv666.top/api/migu.php?id=青海卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 青海卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=511&token=QQ群1039308194
 青海卫视,http://goo.bkpcp.top/mg/qhws
 青海卫视,http://z.b.bkpcp.top/m.php?id=qhws
@@ -17186,7 +17186,7 @@ CETV4,http://183.11.239.36:808/hls/79/index.m3u8
 陕西卫视,rtsp://115.85.232.19/PLTV/88888910/224/3221225544/10000100000000060000000000107324_0.smil
 陕西卫视,http://60.172.130.146:352/tsfile/live/0136_1.m3u8?key=txiptv&playlive=1&authid=0
 陕西卫视,http://182.150.23.74:808/hls/36/index.m3u8
-陕西卫视,http://api.mytv666.top/api/migu.php?id=陕西卫视&type=1&auth_key=c04254f210dea27d7e407f311b51a7507e3e40a696be87cbadc923c0f1b2fb00&t=1746643492&session=0ba678bdba98eab61807ac954220faab
+陕西卫视,http://api.mytv666.top/api/migu.php?id=陕西卫视&type=1&auth_key=af2bf92de1963d399679c103454d749137366ff05728cf15ebeeb81a7580d795&t=1746650281&session=3d091d3155b3fe67d19ad3a3eb34424f
 陕西卫视,http://zhibo.feylen.top/fltv/js/k-web/ku9/js/kzb6.js?id=509&token=QQ群1039308194
 陕西卫视,http://221.226.215.162:352/tsfile/live/0120_7.m3u8?key=txiptv&playlive=1&authid=0
 陕西卫视,http://58.213.65.146:352/tsfile/live/0120_6.m3u8?key=txiptv

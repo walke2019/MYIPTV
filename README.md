@@ -144,3 +144,14 @@ total 8
 ### HTTP测速结果
 - M3U格式：[`result_http_test.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result_http_test.m3u)
 - TXT格式：[`result_http_test.txt`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result_http_test.txt)
+
+## 最新更新信息
+更新时间：2025-05-08 04:48:33
+
+### 可用文件
+- M3U格式：[`result.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.m3u)
+- TXT格式：[`result.txt`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.txt)
+
+### HTTP测速结果
+- M3U格式：[`result_http_test.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result_http_test.m3u)
+- TXT格式：[`result_http_test.txt`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result_http_test.txt)
