@@ -490,7 +490,7 @@ def generate_txt_file(channels, output_path, custom_sort_order=None, include_lis
         # 添加更新时间信息
         current_time = time.strftime("%Y%m%d %H:%M:%S", time.localtime())
         f.write('更新时间,#genre#\n')
-        f.write(f'{current_time},https://github.com/walke2019/MYIPTV/raw/refs/heads/main/output/ad/ad.mp4\n\n')
+        f.write(f'{current_time},https://cdn.jsdelivr.net/gh/walke2019/MYIPTV@main/output/ad/ad.mp4\n\n')
         
         for group_title in sorted_groups:
             group = group_channels[group_title]
