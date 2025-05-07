@@ -783,6 +783,7 @@ async def main():
 
     # 测试每个频道的响应时间
     async with aiohttp.ClientSession() as session:
+        logging.info("\n==================== 第一阶段：HTTP响应时间测试 ====================")
         tasks = [test_channel_response_time(session, channel) for channel in unique_channels]
         unique_channels = await asyncio.gather(*tasks)
         
@@ -790,10 +791,12 @@ async def main():
         filtered_channels_first = filter_channels(unique_channels, include_list)
         generate_m3u_file(filtered_channels_first, 'output/result_http_test.m3u', custom_sort_order=custom_sort_order, include_list=include_list)
         generate_txt_file(filtered_channels_first, 'output/result_http_test.txt', custom_sort_order=custom_sort_order, include_list=include_list)
-        logging.info("已保存HTTP响应时间测试结果。")
+        logging.info("✅ 第一阶段测试完成，已保存HTTP响应时间测试结果。")
         
         # 对特定频道进行测速
         if test_channels:
+            logging.info("\n==================== 第二阶段：视频流测速 ====================")
+            logging.info(f"即将测试以下频道的视频流质量：{', '.join(test_channels)}")
             optimized_channels = await test_specific_channels_speed(session, unique_channels, test_channels)
             
             # 更新原始频道列表中的响应时间
@@ -802,6 +805,9 @@ async def main():
                 channel_key = f"{channel['name']}_{channel['url']}"
                 if channel_key in optimized_channels_dict:
                     channel.update(optimized_channels_dict[channel_key])
+            logging.info("✅ 第二阶段测试完成，已更新频道测速信息。")
+        else:
+            logging.warning("⚠️ 未找到需要测速的频道列表，跳过第二阶段测速。")
 
     # 过滤频道
     filtered_channels = filter_channels(unique_channels, include_list)
@@ -810,7 +816,12 @@ async def main():
     generate_m3u_file(filtered_channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
     generate_txt_file(filtered_channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
 
-    logging.info("成功生成所有结果文件。")
+    logging.info("\n==================== 测速任务完成 ====================")
+    logging.info("✅ 已生成所有结果文件：")
+    logging.info("  - output/result_http_test.m3u：第一阶段HTTP测速结果")
+    logging.info("  - output/result_http_test.txt：第一阶段HTTP测速结果（TXT格式）")
+    logging.info("  - output/result.m3u：最终优化结果")
+    logging.info("  - output/result.txt：最终优化结果（TXT格式）")
 
 
 if __name__ == '__main__':

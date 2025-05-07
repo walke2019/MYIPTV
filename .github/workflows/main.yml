@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 获取完整的git历史
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -99,8 +101,12 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          # 配置git
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          
+          # 先同步远程更改
+          git pull origin main --rebase
           
           # 定义需要添加的文件列表
           files_to_add=(
@@ -127,12 +133,11 @@ jobs:
             else
               echo "Committing and pushing changes to the repository..."
               git commit -m "Update IPTV files (包含两次测速结果)"
-              git push
-              if [ $? -ne 0 ]; then
-                echo "Failed to push changes to the repository. Check Git configuration or permissions."
-                exit 1
-              fi
+              # 使用token进行推送
+              git push "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
             fi
           else
             echo "No files to add. Skipping commit and push."
-          fi    
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
