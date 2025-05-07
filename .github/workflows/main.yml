@@ -2,12 +2,14 @@ name: IPTV M3U 每天自动更新
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天凌晨执行
+    - cron: '0 4 * * *'  # 每天北京时间12点执行（UTC+8）
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai  # 设置时区为中国时区
 
     steps:
       - name: Checkout code
@@ -135,25 +137,26 @@ jobs:
           # 替换原始文件
           mv "$tmp_file" README.md
 
-      - name: Commit and push changes
+      - name: Configure Git
         run: |
-          # 配置git
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+
+      - name: Reset and Clean Working Directory
+        run: |
+          # 重置所有更改
+          git reset --hard
+          # 清理未跟踪的文件
+          git clean -fd
           
-          # 添加所有更改到暂存区
-          git add .
-          
-          # 保存工作区状态
-          git stash save "Temporary save"
-          
+      - name: Sync with Remote
+        run: |
           # 同步远程更改
           git pull origin main --rebase
           
-          # 恢复工作区状态
-          git stash pop
-          
-          # 重新添加所有文件
+      - name: Stage and Commit Changes
+        run: |
+          # 添加生成的文件
           git add output/result.m3u
           git add output/result.txt
           git add output/result_http_test.m3u
@@ -162,12 +165,15 @@ jobs:
           
           # 检查是否有更改需要提交
           if ! git diff --staged --quiet; then
-            echo "Committing and pushing changes to the repository..."
+            echo "Committing changes to the repository..."
             git commit -m "Update IPTV files and README (包含两次测速结果) - $(date '+%Y-%m-%d %H:%M:%S')"
-            # 使用token进行推送
-            git push "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
           else
             echo "No changes to commit."
           fi
+          
+      - name: Push Changes
+        run: |
+          # 推送更改到远程仓库
+          git push "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
