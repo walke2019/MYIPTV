@@ -5,6 +5,7 @@ import os
 from collections import OrderedDict
 import re
 import time
+import shutil
 
 # 配置日志
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -738,17 +739,22 @@ async def test_specific_channels_speed(session, channels, test_channels_list):
 
 
 async def main():
+    # 设置输入和输出文件路径
     subscribe_file = 'config/subscribe.txt'
-    output_m3u = 'output/result.m3u8'
-    output_txt = 'output/result.txt'
-    test_channels_file = 'config/test.txt'
     include_list_file = 'config/include_list.txt'
+    test_channels_file = 'config/test.txt'
+    
+    # 输出文件路径
+    output_dir = 'output'
+    output_m3u = f'{output_dir}/result.m3u'
+    output_txt = f'{output_dir}/result.txt'
+    output_http_test_m3u = f'{output_dir}/result_http_test.m3u'
+    output_http_test_txt = f'{output_dir}/result_http_test.txt'
 
-    # 自定义排序顺序（保留但不使用）
+    # 自定义排序顺序
     custom_sort_order = ['🍄湖南频道', '🍓央视频道', '🐧卫视频道', '🦄️港·澳·台']
 
     # 确保输出目录存在
-    output_dir = os.path.dirname(output_m3u)
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -789,8 +795,8 @@ async def main():
         
         # 保存第一次测速结果（HTTP响应时间测试后）
         filtered_channels_first = filter_channels(unique_channels, include_list)
-        generate_m3u_file(filtered_channels_first, 'output/result_http_test.m3u', custom_sort_order=custom_sort_order, include_list=include_list)
-        generate_txt_file(filtered_channels_first, 'output/result_http_test.txt', custom_sort_order=custom_sort_order, include_list=include_list)
+        generate_m3u_file(filtered_channels_first, output_http_test_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
+        generate_txt_file(filtered_channels_first, output_http_test_txt, custom_sort_order=custom_sort_order, include_list=include_list)
         logging.info("✅ 第一阶段测试完成，已保存HTTP响应时间测试结果。")
         
         # 对特定频道进行测速
@@ -812,16 +818,24 @@ async def main():
     # 过滤频道
     filtered_channels = filter_channels(unique_channels, include_list)
 
-    # 生成最终的 M3U 和 TXT 文件，传递 include_list
-    generate_m3u_file(filtered_channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
-    generate_txt_file(filtered_channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
+    # 生成最终的 M3U 和 TXT 文件
+    if test_channels:
+        # 如果进行了第二阶段测速，使用测速后的结果
+        logging.info("\n生成最终文件（包含测速结果）...")
+        generate_m3u_file(filtered_channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
+        generate_txt_file(filtered_channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
+    else:
+        # 如果没有进行第二阶段测速，复制第一阶段的结果
+        logging.info("\n未进行第二阶段测速，复制第一阶段结果...")
+        shutil.copy2(output_http_test_m3u, output_m3u)
+        shutil.copy2(output_http_test_txt, output_txt)
 
     logging.info("\n==================== 测速任务完成 ====================")
     logging.info("✅ 已生成所有结果文件：")
-    logging.info("  - output/result_http_test.m3u：第一阶段HTTP测速结果")
-    logging.info("  - output/result_http_test.txt：第一阶段HTTP测速结果（TXT格式）")
-    logging.info("  - output/result.m3u：最终优化结果")
-    logging.info("  - output/result.txt：最终优化结果（TXT格式）")
+    logging.info(f"  - {output_http_test_m3u}：第一阶段HTTP测速结果")
+    logging.info(f"  - {output_http_test_txt}：第一阶段HTTP测速结果（TXT格式）")
+    logging.info(f"  - {output_m3u}：最终优化结果")
+    logging.info(f"  - {output_txt}：最终优化结果（TXT格式）")
 
 
 if __name__ == '__main__':
