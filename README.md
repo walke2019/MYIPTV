@@ -4,34 +4,107 @@
 
 一个可高度自定义的IPTV接口更新项目📺，自定义频道菜单，自动获取直播源，测速验效后生成可用的结果，可实现『✨秒播级体验🚀』
 
-## 快速上手
-### 工作流部署
-1. Fork本项目：打开 https://github.com/walke2019/IPTV_SuperA 点击右上角的`Fork`按钮。
-2. 修改配置：
-   - 订阅源（`config/subscribe.txt`）：支持txt和m3u地址作为订阅，程序将依次读取其中的频道接口数据
-   - 频道列表（`config/include_list.txt`）：定义需要保留的频道组和频道名称
-   - 测速列表（`config/test.txt`）：定义需要进行测速的频道列表
+## 功能特性
 
-3. 运行更新工作流：
-   - 首次执行工作流需要您手动触发，后续执行（默认每天凌晨`00:00`）将自动触发
-   - 如果您修改了配置文件想立刻执行更新，可以在Actions页面手动触发`Run workflow`
-   - 工作流执行成功后（绿色勾图标），会生成以下文件：
-     - `output/result_http_test.m3u`：第一次HTTP响应测速的结果
-     - `output/result_http_test.txt`：第一次HTTP响应测速的结果（TXT格式）
-     - `output/result.m3u`：最终测速优化后的结果
-     - `output/result.txt`：最终测速优化后的结果（TXT格式）
-
-4. 使用生成的直播源：
-   - 直接访问：`https://raw.githubusercontent.com/您的用户名/IPTV_SuperA/main/output/result.m3u`
-   - CDN加速：`https://cdn.jsdelivr.net/gh/您的用户名/IPTV_SuperA@main/output/result.txt`
-   - 将以上链接复制到支持IPTV直播的播放器中即可使用
-
-## 特性说明
+### 1. 多源聚合
+- 支持从多个源获取IPTV频道列表
 - 支持M3U和TXT格式的订阅源
-- 两次测速保证频道质量：
-  1. 第一次HTTP响应测速
-  2. 第二次视频流测速（针对`config/test.txt`中的频道）
-- 自动去重：去除相同URL的重复频道
-- 分组整理：根据`include_list.txt`配置的分组保存频道
-- 测速排序：测速频道会按照响应速度排序
-- 每日自动更新：自动获取最新的直播源并进行测速
+- 自动去重（基于URL去重）
+- 自动合并相似分组
+
+### 2. 智能测速
+- 两阶段测速机制：
+  1. 第一阶段：HTTP响应时间测试
+     - 测试所有频道的HTTP响应时间
+     - 生成初步测速结果：`result_http_test.m3u`和`result_http_test.txt`
+  2. 第二阶段：视频流测速
+     - 仅对`config/test.txt`中指定的频道进行测速
+     - 测试视频流的实际下载速度
+     - 生成最终优化结果：`result.m3u`和`result.txt`
+
+### 3. 分组管理
+- 支持自定义分组名称映射
+- 自动合并相似分组（如"央视频道"和"CCTV"）
+- 支持排除特定分组
+- 分组内频道智能排序
+
+## 配置说明
+
+### 1. 订阅源配置（config/subscribe.txt）
+```
+http://example1.com/live.m3u
+http://example2.com/live.txt
+```
+- 每行一个订阅源地址
+- 支持M3U和TXT格式
+- 程序会自动识别格式并解析
+
+### 2. 分组和频道配置（config/include_list.txt）
+```
+group:🍄湖南频道
+湖南都市
+湖南经视
+湖南娱乐
+
+group:🍓央视频道
+CCTV-1/CCTV1
+CCTV-2/CCTV2
+
+group:🐧卫视频道
+湖南卫视
+浙江卫视
+
+group:🦄️港·澳·台
+凤凰中文
+TVB翡翠台
+```
+- 使用`group:`前缀定义分组
+- 每个频道可以有多个名称变体（用`/`分隔）
+- 分组顺序决定最终显示顺序
+- 支持emoji作为分组图标
+- 内置分组映射关系：
+  - 央视频道 ⟺ 🍓央视频道
+  - CCTV ⟺ 🍓央视频道
+  - 卫视频道 ⟺ 🐧卫视频道
+  - 湖南 ⟺ 🍄湖南频道
+  - 港澳台 ⟺ 🦄️港·澳·台
+
+### 3. 测速频道配置（config/test.txt）
+```
+湖南都市
+湖南经视
+湖南娱乐
+湖南卫视
+CCTV-1/CCTV1
+```
+- 每行一个频道名称
+- 只有在此列表中的频道才会进行视频流测速
+- 支持频道名称变体（与include_list.txt一致）
+- 测速结果会影响频道排序（速度快的排在前面）
+
+## 使用说明
+
+### 1. 快速开始
+1. Fork本项目：打开 https://github.com/walke2019/IPTV_SuperA 点击右上角的`Fork`按钮
+2. 修改配置文件：
+   - `config/subscribe.txt`：添加你的IPTV订阅源
+   - `config/include_list.txt`：配置需要的分组和频道
+   - `config/test.txt`：配置需要测速的频道
+
+### 2. 自动更新
+- GitHub Actions会在每天凌晨00:00自动运行
+- 每次运行会生成4个文件：
+  - `output/result_http_test.m3u`：第一阶段HTTP测速结果（M3U格式）
+  - `output/result_http_test.txt`：第一阶段HTTP测速结果（TXT格式）
+  - `output/result.m3u`：最终优化结果（M3U格式）
+  - `output/result.txt`：最终优化结果（TXT格式）
+
+### 3. 使用生成的直播源
+- 直接访问：`https://raw.githubusercontent.com/您的用户名/IPTV_SuperA/main/output/result.m3u`
+- CDN加速：`https://cdn.jsdelivr.net/gh/您的用户名/IPTV_SuperA@main/output/result.txt`
+
+## 最佳实践
+1. 建议在`test.txt`中只包含常用的频道，这样可以加快更新速度
+2. 使用`include_list.txt`来整理和规范化频道分组
+3. 定期检查GitHub Actions运行日志，了解更新状态
+4. 如果需要立即更新，可以手动触发GitHub Actions工作流
