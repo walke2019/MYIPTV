@@ -1,4 +1,4 @@
-![IPTV](https://socialify.git.ci/walke2019/IPTV_SuperA/image?description=1&descriptionEditable=IPTV%20%E7%9B%B4%E6%92%AD%E6%BA%90&forks=1&language=1&name=1&owner=1&pattern=Circuit%20Board&stargazers=1&theme=Auto)
+![IPTV](https://socialify.git.ci/walke2019/MYIPTV/image?description=1&descriptionEditable=IPTV%20%E7%9B%B4%E6%92%AD%E6%BA%90&forks=1&language=1&name=1&owner=1&pattern=Circuit%20Board&stargazers=1&theme=Auto)
 
 # IPTV-API
 
@@ -85,7 +85,7 @@ CCTV-1/CCTV1
 ## 使用说明
 
 ### 1. 快速开始
-1. Fork本项目：打开 https://github.com/walke2019/IPTV_SuperA 点击右上角的`Fork`按钮
+1. Fork本项目：打开 https://github.com/walke2019/MYIPTV 点击右上角的`Fork`按钮
 2. 修改配置文件：
    - `config/subscribe.txt`：添加你的IPTV订阅源
    - `config/include_list.txt`：配置需要的分组和频道
@@ -100,8 +100,8 @@ CCTV-1/CCTV1
   - `output/result.txt`：最终优化结果（TXT格式）
 
 ### 3. 使用生成的直播源
-- 直接访问：`https://raw.githubusercontent.com/您的用户名/IPTV_SuperA/main/output/result.m3u`
-- CDN加速：`https://cdn.jsdelivr.net/gh/您的用户名/IPTV_SuperA@main/output/result.txt`
+- 直接访问：`https://raw.githubusercontent.com/您的用户名/MYIPTV/main/output/result.m3u`
+- CDN加速：`https://cdn.jsdelivr.net/gh/您的用户名/MYIPTV@main/output/result.txt`
 
 ## 最佳实践
 1. 建议在`test.txt`中只包含常用的频道，这样可以加快更新速度
