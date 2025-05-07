@@ -83,7 +83,7 @@ jobs:
             pipenv run python main.py 2>&1 | tee main.log
             if [ $? -ne 0 ]; then
               echo "Failed to generate M3U and TXT files. Check main.py or dependencies."
-              echo "Check main.log for detailed error messages."
+              echo "Check main.log for detailed error messages:"
               cat main.log
               exit 1
             fi
@@ -94,16 +94,39 @@ jobs:
               "output/result_http_test.m3u"
               "output/result_http_test.txt"
             )
+            echo "Checking generated files..."
+            ls -la output/
             for file in "${required_files[@]}"; do
               if [ ! -f "$file" ]; then
-                echo "File $file was not generated. Check main.log for details."
-                cat main.log
+                echo "Error: File $file was not generated."
+                echo "Current directory contents:"
+                ls -la
+                echo "Output directory contents:"
+                ls -la output/
                 exit 1
+              else
+                echo "✓ Found $file"
+                echo "File size: $(stat -f%z "$file") bytes"
               fi
             done
           else
-            echo "Script file main.py not found. Please ensure it exists."
+            echo "Error: Script file main.py not found in current directory:"
+            ls -la
             exit 1
+          fi
+
+      - name: Debug File Status
+        run: |
+          echo "Current directory structure:"
+          ls -R
+          echo "Git status:"
+          git status
+          echo "Checking output directory:"
+          if [ -d "output" ]; then
+            echo "Output directory exists"
+            ls -la output/
+          else
+            echo "Output directory does not exist"
           fi
 
       - name: Update README.md
@@ -146,38 +169,65 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          # 显示当前git配置
+          echo "Current git configuration:"
+          git config --list
 
       - name: Reset and Clean Working Directory
         run: |
+          echo "Git status before reset:"
+          git status
           # 重置所有更改
           git reset --hard
           # 清理未跟踪的文件
           git clean -fd
-          
+          echo "Git status after reset:"
+          git status
+
       - name: Sync with Remote
         run: |
+          echo "Fetching from remote..."
+          git fetch origin
+          echo "Current branch status:"
+          git status
           # 同步远程更改
           git pull origin main --rebase
-          
+          echo "Git status after pull:"
+          git status
+
       - name: Stage and Commit Changes
         run: |
+          echo "Staging files..."
+          # 创建输出目录（如果不存在）
+          mkdir -p output
+          
           # 添加生成的文件
-          git add output/result.m3u
-          git add output/result.txt
-          git add output/result_http_test.m3u
-          git add output/result_http_test.txt
-          git add README.md
+          for file in output/result.m3u output/result.txt output/result_http_test.m3u output/result_http_test.txt README.md; do
+            if [ -f "$file" ]; then
+              echo "Adding $file to git..."
+              git add "$file"
+              echo "File size of $file: $(stat -f%z "$file") bytes"
+            else
+              echo "Warning: $file does not exist"
+            fi
+          done
           
           # 检查是否有更改需要提交
           if ! git diff --staged --quiet; then
-            echo "Committing changes to the repository..."
+            echo "Changes detected, committing..."
             git commit -m "Update IPTV files and README (包含两次测速结果) - $(date '+%Y-%m-%d %H:%M:%S')"
           else
-            echo "No changes to commit."
+            echo "No changes to commit. Current status:"
+            git status
           fi
-          
+
       - name: Push Changes
         run: |
+          echo "Attempting to push changes..."
+          echo "Current branch:"
+          git branch
+          echo "Remote repositories:"
+          git remote -v
           # 推送更改到远程仓库
           git push "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
         env:
