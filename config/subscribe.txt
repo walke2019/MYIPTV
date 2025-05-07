@@ -1,6 +1,9 @@
 https://cnb.cool/junchao.tang/llive/-/git/raw/main/小云TV直播
+https://live.izbds.com/tv/iptv4.txt
+https://cdn.jsdelivr.net/gh/kimwang1978/collect-tv-txt@main/merged_output.txt
 http://gg.7749.org/z/0/dzh.txt
 http://api.mytv666.top/lives/free.php?type=txt
+https://gh-proxy.com/raw.githubusercontent.com/vbskycn/iptv/refs/heads/master/tv/iptv4.txt
 https://iptv.catvod.com/tv.m3u
 https://framagit.org/knnnn/n/-/raw/main/j/kzb.py
 http://47.120.41.246:8899/zb.txt

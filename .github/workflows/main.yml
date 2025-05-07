@@ -78,11 +78,20 @@ jobs:
               cat main.log
               exit 1
             fi
-            if [ ! -f "output/result.m3u" ] || [ ! -f "output/result.txt" ]; then
-              echo "M3U and/or TXT files were not generated. Check main.log for details."
-              cat main.log
-              exit 1
-            fi
+            # 检查所有需要的文件是否生成
+            required_files=(
+              "output/result.m3u"
+              "output/result.txt"
+              "output/result_http_test.m3u"
+              "output/result_http_test.txt"
+            )
+            for file in "${required_files[@]}"; do
+              if [ ! -f "$file" ]; then
+                echo "File $file was not generated. Check main.log for details."
+                cat main.log
+                exit 1
+              fi
+            done
           else
             echo "Script file main.py not found. Please ensure it exists."
             exit 1
@@ -92,24 +101,32 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          files_to_add=()
-          if [ -f "output/result.m3u" ]; then
-            files_to_add+=("output/result.m3u")
-          else
-            echo "File output/result.m3u not found. Skipping it."
-          fi
-          if [ -f "output/result.txt" ]; then
-            files_to_add+=("output/result.txt")
-          else
-            echo "File output/result.txt not found. Skipping it."
-          fi
-          if [ ${#files_to_add[@]} -gt 0 ]; then
-            git add "${files_to_add[@]}"
+          
+          # 定义需要添加的文件列表
+          files_to_add=(
+            "output/result.m3u"
+            "output/result.txt"
+            "output/result_http_test.m3u"
+            "output/result_http_test.txt"
+          )
+          
+          # 检查并添加存在的文件
+          existing_files=()
+          for file in "${files_to_add[@]}"; do
+            if [ -f "$file" ]; then
+              existing_files+=("$file")
+            else
+              echo "File $file not found. Skipping it."
+            fi
+          done
+          
+          if [ ${#existing_files[@]} -gt 0 ]; then
+            git add "${existing_files[@]}"
             if git diff --staged --quiet; then
               echo "No changes to commit in output files."
             else
               echo "Committing and pushing changes to the repository..."
-              git commit -m "Update IPTV files"
+              git commit -m "Update IPTV files (包含两次测速结果)"
               git push
               if [ $? -ne 0 ]; then
                 echo "Failed to push changes to the repository. Check Git configuration or permissions."
