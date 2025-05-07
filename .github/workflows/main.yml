@@ -22,6 +22,7 @@ jobs:
         with:
           fetch-depth: 0  # 获取完整的git历史
           token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GITHUB_TOKEN 进行认证
+          persist-credentials: true  # 保持认证状态
 
       - name: Install GitHub CLI
         run: |
@@ -164,7 +165,7 @@ jobs:
             echo "提交更改..."
             git commit -m "更新 IPTV 文件和 README - $(date '+%Y-%m-%d %H:%M:%S')"
             
-            # 设置新的远程URL并推送
+            # 使用 GITHUB_TOKEN 进行认证并推送
             git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
             git push -f origin HEAD:main
           fi
