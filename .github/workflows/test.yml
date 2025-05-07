@@ -1,0 +1,110 @@
+name: 测试文件写入和覆盖
+
+on:
+  # 允许手动触发
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Git Config
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Create Test Files
+        run: |
+          # 创建测试目录
+          mkdir -p test_output
+          
+          # 创建测试文件1
+          echo "这是测试文件1 - 创建于 $(date '+%Y-%m-%d %H:%M:%S')" > test_output/test1.txt
+          echo "添加一些内容" >> test_output/test1.txt
+          
+          # 创建测试文件2
+          cat << EOF > test_output/test2.txt
+          这是测试文件2
+          创建时间：$(date '+%Y-%m-%d %H:%M:%S')
+          测试多行内容
+          行1
+          行2
+          行3
+          EOF
+          
+          # 显示创建的文件
+          echo "已创建的文件："
+          ls -la test_output/
+          
+          # 显示文件内容
+          echo -e "\n测试文件1的内容："
+          cat test_output/test1.txt
+          echo -e "\n测试文件2的内容："
+          cat test_output/test2.txt
+
+      - name: Modify Files
+        run: |
+          # 修改测试文件1
+          echo "这是修改后的测试文件1 - 修改于 $(date '+%Y-%m-%d %H:%M:%S')" > test_output/test1.txt
+          
+          # 追加内容到测试文件2
+          echo "这是追加的内容 - $(date '+%Y-%m-%d %H:%M:%S')" >> test_output/test2.txt
+          
+          # 显示修改后的内容
+          echo -e "\n修改后的测试文件1内容："
+          cat test_output/test1.txt
+          echo -e "\n修改后的测试文件2内容："
+          cat test_output/test2.txt
+
+      - name: Update README
+        run: |
+          # 在README.md中添加测试文件信息
+          cat << EOF >> README.md
+          
+          ## 测试文件信息
+          最后更新时间：$(date '+%Y-%m-%d %H:%M:%S')
+          
+          ### 测试文件列表
+          $(ls -l test_output/)
+          
+          ### 文件内容预览
+          #### test1.txt
+          \`\`\`
+          $(cat test_output/test1.txt)
+          \`\`\`
+          
+          #### test2.txt
+          \`\`\`
+          $(cat test_output/test2.txt)
+          \`\`\`
+          EOF
+
+      - name: Commit and Push
+        run: |
+          # 添加所有更改
+          git add test_output/
+          git add README.md
+          
+          # 检查是否有更改需要提交
+          if git diff --staged --quiet; then
+            echo "没有发现需要提交的更改"
+          else
+            echo "提交更改..."
+            git commit -m "测试文件更新 - $(date '+%Y-%m-%d %H:%M:%S')"
+            
+            # 设置新的远程URL并推送
+            git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+            git push origin HEAD:main
+          fi 

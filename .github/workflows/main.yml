@@ -5,7 +5,7 @@ on:
     - cron: '0 4 * * *'  # 每天北京时间12点执行（UTC+8）
   workflow_dispatch:
 
-# 添加权限配置
+# 添加必要的权限设置
 permissions:
   contents: write
   
@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0  # 获取完整的git历史
-          persist-credentials: false  # 不使用默认token
+          token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GITHUB_TOKEN 进行认证
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -87,148 +87,73 @@ jobs:
               cat main.log
               exit 1
             fi
-            # 检查所有需要的文件是否生成
+            
+            # 检查所有需要的文件
             required_files=(
               "output/result.m3u"
               "output/result.txt"
               "output/result_http_test.m3u"
               "output/result_http_test.txt"
             )
-            echo "Checking generated files..."
-            ls -la output/
+            
+            echo "检查生成的文件..."
             for file in "${required_files[@]}"; do
               if [ ! -f "$file" ]; then
-                echo "Error: File $file was not generated."
-                echo "Current directory contents:"
+                echo "错误: 文件 $file 未生成"
+                echo "当前目录内容:"
                 ls -la
-                echo "Output directory contents:"
+                echo "output 目录内容:"
                 ls -la output/
                 exit 1
               else
-                echo "✓ Found $file"
-                echo "File size: $(stat -f%z "$file") bytes"
+                echo "✓ 找到文件 $file"
+                echo "文件大小: $(stat -f%z "$file") bytes"
               fi
             done
           else
-            echo "Error: Script file main.py not found in current directory:"
+            echo "未找到 main.py 文件，当前目录内容:"
             ls -la
             exit 1
           fi
 
-      - name: Debug File Status
+      - name: Update README
         run: |
-          echo "Current directory structure:"
-          ls -R
-          echo "Git status:"
-          git status
-          echo "Checking output directory:"
-          if [ -d "output" ]; then
-            echo "Output directory exists"
-            ls -la output/
-          else
-            echo "Output directory does not exist"
-          fi
-
-      - name: Update README.md
-        run: |
-          # 获取当前时间
-          current_time=$(date '+%Y-%m-%d %H:%M:%S')
+          # 在README.md中添加更新信息
+          cat << EOF >> README.md
           
-          # 获取仓库信息
-          repo_owner=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1)
+          ## 最新更新信息
+          更新时间：$(date '+%Y-%m-%d %H:%M:%S')
           
-          # 创建临时文件
-          tmp_file=$(mktemp)
+          ### 可用文件
+          - M3U格式：[\`result.m3u\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/result.m3u)
+          - TXT格式：[\`result.txt\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/result.txt)
           
-          # 读取README.md直到"### 3. 使用生成的直播源"这一行
-          sed '/### 3. 使用生成的直播源/q' README.md > "$tmp_file"
-          
-          # 添加更新的内容
-          cat >> "$tmp_file" << EOF
-          - 最近更新时间：\`$current_time\`
-          - 直接访问：
-            - M3U格式：[\`result.m3u\`](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/output/result.m3u)
-            - TXT格式：[\`result.txt\`](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/output/result.txt)
-          - CDN加速：
-            - M3U格式：[\`result.m3u\`](https://cdn.jsdelivr.net/gh/$GITHUB_REPOSITORY@main/output/result.m3u)
-            - TXT格式：[\`result.txt\`](https://cdn.jsdelivr.net/gh/$GITHUB_REPOSITORY@main/output/result.txt)
-          - HTTP测速结果：
-            - M3U格式：[\`result_http_test.m3u\`](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/output/result_http_test.m3u)
-            - TXT格式：[\`result_http_test.txt\`](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/output/result_http_test.txt)
-
-          ## 最佳实践
+          ### HTTP测速结果
+          - M3U格式：[\`result_http_test.m3u\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/result_http_test.m3u)
+          - TXT格式：[\`result_http_test.txt\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/result_http_test.txt)
           EOF
+
+      - name: Commit and Push
+        run: |
+          # 配置Git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # 从"## 最佳实践"开始的内容追加到临时文件
-          sed -n '/^## 最佳实践/,$p' README.md >> "$tmp_file"
-          
-          # 替换原始文件
-          mv "$tmp_file" README.md
-
-      - name: Configure Git
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          # 显示当前git配置
-          echo "Current git configuration:"
-          git config --list
-
-      - name: Reset and Clean Working Directory
-        run: |
-          echo "Git status before reset:"
-          git status
-          # 重置所有更改
-          git reset --hard
-          # 清理未跟踪的文件
-          git clean -fd
-          echo "Git status after reset:"
-          git status
-
-      - name: Sync with Remote
-        run: |
-          echo "Fetching from remote..."
-          git fetch origin
-          echo "Current branch status:"
-          git status
-          # 同步远程更改
-          git pull origin main --rebase
-          echo "Git status after pull:"
-          git status
-
-      - name: Stage and Commit Changes
-        run: |
-          echo "Staging files..."
-          # 创建输出目录（如果不存在）
-          mkdir -p output
-          
-          # 添加生成的文件
-          for file in output/result.m3u output/result.txt output/result_http_test.m3u output/result_http_test.txt README.md; do
-            if [ -f "$file" ]; then
-              echo "Adding $file to git..."
-              git add "$file"
-              echo "File size of $file: $(stat -f%z "$file") bytes"
-            else
-              echo "Warning: $file does not exist"
-            fi
-          done
+          # 添加所有更改
+          git add output/result.m3u
+          git add output/result.txt
+          git add output/result_http_test.m3u
+          git add output/result_http_test.txt
+          git add README.md
           
           # 检查是否有更改需要提交
-          if ! git diff --staged --quiet; then
-            echo "Changes detected, committing..."
-            git commit -m "Update IPTV files and README (包含两次测速结果) - $(date '+%Y-%m-%d %H:%M:%S')"
+          if git diff --staged --quiet; then
+            echo "没有需要提交的更改"
           else
-            echo "No changes to commit. Current status:"
-            git status
+            echo "提交更改..."
+            git commit -m "更新 IPTV 文件和 README - $(date '+%Y-%m-%d %H:%M:%S')"
+            
+            # 设置新的远程URL并推送
+            git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+            git push origin HEAD:main
           fi
-
-      - name: Push Changes
-        run: |
-          echo "Attempting to push changes..."
-          echo "Current branch:"
-          git branch
-          echo "Remote repositories:"
-          git remote -v
-          # 配置新的远程URL
-          git remote set-url origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-          # 推送更改
-          git push origin HEAD:main
