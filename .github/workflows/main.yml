@@ -8,6 +8,7 @@ on:
 # 添加必要的权限设置
 permissions:
   contents: write
+  actions: write  # 允许工作流修改操作
   
 jobs:
   build:
