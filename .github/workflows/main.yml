@@ -99,45 +99,75 @@ jobs:
             exit 1
           fi
 
+      - name: Update README.md
+        run: |
+          # 获取当前时间
+          current_time=$(date '+%Y-%m-%d %H:%M:%S')
+          
+          # 获取仓库信息
+          repo_owner=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1)
+          
+          # 创建临时文件
+          tmp_file=$(mktemp)
+          
+          # 读取README.md直到"### 3. 使用生成的直播源"这一行
+          sed '/### 3. 使用生成的直播源/q' README.md > "$tmp_file"
+          
+          # 添加更新的内容
+          cat >> "$tmp_file" << EOF
+          - 最近更新时间：\`$current_time\`
+          - 直接访问：
+            - M3U格式：[\`result.m3u\`](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/output/result.m3u)
+            - TXT格式：[\`result.txt\`](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/output/result.txt)
+          - CDN加速：
+            - M3U格式：[\`result.m3u\`](https://cdn.jsdelivr.net/gh/$GITHUB_REPOSITORY@main/output/result.m3u)
+            - TXT格式：[\`result.txt\`](https://cdn.jsdelivr.net/gh/$GITHUB_REPOSITORY@main/output/result.txt)
+          - HTTP测速结果：
+            - M3U格式：[\`result_http_test.m3u\`](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/output/result_http_test.m3u)
+            - TXT格式：[\`result_http_test.txt\`](https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/output/result_http_test.txt)
+
+          ## 最佳实践
+          EOF
+          
+          # 从"## 最佳实践"开始的内容追加到临时文件
+          sed -n '/^## 最佳实践/,$p' README.md >> "$tmp_file"
+          
+          # 替换原始文件
+          mv "$tmp_file" README.md
+
       - name: Commit and push changes
         run: |
           # 配置git
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # 先同步远程更改
+          # 添加所有更改到暂存区
+          git add .
+          
+          # 保存工作区状态
+          git stash save "Temporary save"
+          
+          # 同步远程更改
           git pull origin main --rebase
           
-          # 定义需要添加的文件列表
-          files_to_add=(
-            "output/result.m3u"
-            "output/result.txt"
-            "output/result_http_test.m3u"
-            "output/result_http_test.txt"
-          )
+          # 恢复工作区状态
+          git stash pop
           
-          # 检查并添加存在的文件
-          existing_files=()
-          for file in "${files_to_add[@]}"; do
-            if [ -f "$file" ]; then
-              existing_files+=("$file")
-            else
-              echo "File $file not found. Skipping it."
-            fi
-          done
+          # 重新添加所有文件
+          git add output/result.m3u
+          git add output/result.txt
+          git add output/result_http_test.m3u
+          git add output/result_http_test.txt
+          git add README.md
           
-          if [ ${#existing_files[@]} -gt 0 ]; then
-            git add "${existing_files[@]}"
-            if git diff --staged --quiet; then
-              echo "No changes to commit in output files."
-            else
-              echo "Committing and pushing changes to the repository..."
-              git commit -m "Update IPTV files (包含两次测速结果)"
-              # 使用token进行推送
-              git push "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
-            fi
+          # 检查是否有更改需要提交
+          if ! git diff --staged --quiet; then
+            echo "Committing and pushing changes to the repository..."
+            git commit -m "Update IPTV files and README (包含两次测速结果) - $(date '+%Y-%m-%d %H:%M:%S')"
+            # 使用token进行推送
+            git push "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
           else
-            echo "No files to add. Skipping commit and push."
+            echo "No changes to commit."
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
