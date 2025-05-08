@@ -897,7 +897,7 @@ async def main():
             generate_m3u_file(filtered_channels_first, output_first_test_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
             generate_txt_file(filtered_channels_first, output_first_test_txt, custom_sort_order=custom_sort_order, include_list=include_list)
             logging.info("✅ 第一阶段测试完成，已保存HTTP响应时间测试结果。")
-    
+        
     # 如果是第二次测速或没有指定参数，执行视频流测速
     if args.http_test or (not args.first_test and not args.http_test):
         # 对特定频道进行测速
@@ -913,18 +913,20 @@ async def main():
                     channel_key = f"{channel['name']}_{channel['url']}"
                     if channel_key in optimized_channels_dict:
                         channel.update(optimized_channels_dict[channel_key])
-                
-                # 过滤频道
-                filtered_channels = filter_channels(unique_channels, include_list)
-                
-                # 生成最终的 M3U 和 TXT 文件
-                logging.info("\n生成最终文件（包含测速结果）...")
-                generate_m3u_file(filtered_channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
-                generate_txt_file(filtered_channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
-                logging.info("✅ 第二阶段测试完成，已更新频道测速信息。")
+
+    # 过滤频道
+    filtered_channels = filter_channels(unique_channels, include_list)
+
+    # 生成最终的 M3U 和 TXT 文件
+    if args.http_test or (not args.first_test and not args.http_test):
+        if test_channels:
+            logging.info("\n生成最终文件（包含测速结果）...")
+            generate_m3u_file(filtered_channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
+            generate_txt_file(filtered_channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
+            logging.info("✅ 第二阶段测试完成，已更新频道测速信息。")
         else:
             logging.warning("⚠️ 未找到需要测速的频道列表，跳过第二阶段测速。")
-    
+
     # 如果没有指定具体测试，则执行完整流程
     if not args.first_test and not args.http_test:
         logging.info("\n==================== 测速任务完成 ====================")
