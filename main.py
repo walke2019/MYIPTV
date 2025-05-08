@@ -807,19 +807,52 @@ async def main():
         tested_channels = await test_channels_with_ffmpeg(channels_to_test)
         
         # 更新原始频道列表中的测试结果
+        updated_channels = []
         tested_dict = {f"{ch['name']}_{ch['url']}": ch for ch in tested_channels}
-        for i, channel in enumerate(channels):
+        
+        # 创建一个集合来跟踪哪些频道名称已经通过FFmpeg测试
+        ffmpeg_tested_names = set()
+        for ch in tested_channels:
+            if ch.get('ffmpeg_status') == 'success':
+                ffmpeg_tested_names.add(ch['name'].split('/')[0].strip())
+        
+        # 处理原始频道列表
+        for channel in channels:
             channel_key = f"{channel['name']}_{channel['url']}"
+            channel_name = channel['name'].split('/')[0].strip()
+            
             if channel_key in tested_dict:
-                channels[i] = tested_dict[channel_key]
+                # 这是一个被测试过的频道
+                tested_channel = tested_dict[channel_key]
+                
+                if tested_channel.get('ffmpeg_status') == 'success':
+                    # 测试成功，添加到更新列表
+                    updated_channels.append(tested_channel)
+                    
+            elif channel_name not in ffmpeg_channel_set:
+                # 这不是我们需要测试的频道，保留原样
+                updated_channels.append(channel)
+            elif channel_name not in ffmpeg_tested_names:
+                # 这是个需要测试但没有通过测试的频道名称，且没有其他成功测试的同名频道
+                # 我们保留它，避免完全删除某个频道
+                updated_channels.append(channel)
         
         # 重新生成m3u和txt文件
         logging.info("\n生成FFmpeg测试后的文件...")
         # 读取包含列表文件
         include_list = read_include_list_file(include_list_file)
-        generate_m3u_file(channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
-        generate_txt_file(channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
-        logging.info("✅ FFmpeg测试完成，已更新频道测速信息。")
+        generate_m3u_file(updated_channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
+        generate_txt_file(updated_channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
+        
+        # 输出测试统计信息
+        total_tested = len(channels_to_test)
+        success_count = sum(1 for ch in tested_channels if ch.get('ffmpeg_status') == 'success')
+        fail_count = total_tested - success_count
+        
+        logging.info(f"✅ FFmpeg测试完成，共测试 {total_tested} 个频道源")
+        logging.info(f"✅ 测试成功: {success_count} 个")
+        logging.info(f"❌ 测试失败: {fail_count} 个")
+        logging.info(f"✓ 保留频道总数: {len(updated_channels)} 个")
         return
 
     # 读取订阅文件
@@ -924,6 +957,7 @@ async def test_channels_with_ffmpeg(channels):
         channel['ffmpeg_response_time'] = float('inf')
         channel['ffmpeg_speed'] = 0
         channel['ffmpeg_error'] = None
+        channel['ffmpeg_status'] = 'failed'  # 默认为失败状态
         
         try:
             # 构建FFmpeg命令
@@ -958,9 +992,18 @@ async def test_channels_with_ffmpeg(channels):
                 
                 # 检查是否有错误输出
                 if proc.returncode != 0:
-                    channel['ffmpeg_error'] = stderr
+                    channel['ffmpeg_error'] = f"FFmpeg返回非零状态码: {proc.returncode}"
                     logging.warning(f"FFmpeg测试返回非零状态码: {proc.returncode}")
                     logging.debug(f"错误输出: {stderr}")
+                    
+                    # 根据不同的错误码设置不同的失败标记
+                    if proc.returncode == 8:
+                        channel['ffmpeg_status'] = 'not_found'  # 找不到文件或无法打开流
+                    elif proc.returncode == 146:
+                        channel['ffmpeg_status'] = 'refused'  # 连接被拒绝
+                    else:
+                        channel['ffmpeg_status'] = 'failed'  # 其他错误
+                        
                 else:
                     # 解析输出，查找速度信息
                     speed_pattern = r'speed=\s*([0-9.]+)x'
@@ -969,6 +1012,7 @@ async def test_channels_with_ffmpeg(channels):
                         # 取最后一个速度值
                         last_speed = float(matches[-1])
                         channel['ffmpeg_speed'] = last_speed
+                        channel['ffmpeg_status'] = 'success'  # 标记为成功
                         logging.info(f"频道 {channel['name']} 的FFmpeg测试速度: {last_speed}x")
                     else:
                         logging.warning(f"未能从FFmpeg输出中解析到速度信息")
@@ -977,17 +1021,20 @@ async def test_channels_with_ffmpeg(channels):
                 proc.kill()
                 logging.warning(f"FFmpeg测试超时: {channel['name']}")
                 channel['ffmpeg_error'] = "Timeout after 15 seconds"
+                channel['ffmpeg_status'] = 'timeout'  # 标记为超时
         
         except Exception as e:
             logging.error(f"FFmpeg测试异常: {str(e)}")
             channel['ffmpeg_error'] = str(e)
+            channel['ffmpeg_status'] = 'error'  # 标记为错误
         
         # 更新频道对象
-        if channel['ffmpeg_speed'] > 0:
+        if channel['ffmpeg_status'] == 'success' and channel['ffmpeg_speed'] > 0:
             # 如果FFmpeg测试成功，使用FFmpeg的速度来排序
             channel['speed'] = channel['ffmpeg_speed']
             channel['stream_response_time'] = channel['ffmpeg_response_time']
         
+        # 添加所有频道到结果，包括失败的
         results.append(channel)
     
     # 按频道名称分组
@@ -998,27 +1045,36 @@ async def test_channels_with_ffmpeg(channels):
             grouped_channels[channel_name] = []
         grouped_channels[channel_name].append(channel)
     
-    # 对每个频道组内的链接按FFmpeg速度排序
+    # 对每个频道组内的链接按FFmpeg速度排序，同时过滤掉失败的频道
     sorted_results = []
     for channel_name, channels in grouped_channels.items():
-        # 按FFmpeg速度排序（如果有）
-        sorted_channels = sorted(channels, key=lambda x: (-x.get('ffmpeg_speed', 0), 
-                                                         x.get('ffmpeg_response_time', float('inf')),
-                                                         -x.get('speed', 0), 
-                                                         x.get('stream_response_time', float('inf'))))
+        # 将频道分为成功和失败两组
+        success_channels = [ch for ch in channels if ch['ffmpeg_status'] == 'success']
+        failed_channels = [ch for ch in channels if ch['ffmpeg_status'] != 'success']
+        
+        # 按FFmpeg速度排序成功的频道
+        sorted_success = sorted(success_channels, key=lambda x: -x.get('ffmpeg_speed', 0))
         
         # 打印最佳源的信息
-        if sorted_channels:
-            best = sorted_channels[0]
+        if sorted_success:
+            best = sorted_success[0]
             logging.info(f"频道 {channel_name} 的最佳源:")
             logging.info(f"  URL: {best['url']}")
             logging.info(f"  FFmpeg速度: {best.get('ffmpeg_speed', 0):.2f}x")
             logging.info(f"  FFmpeg响应时间: {best.get('ffmpeg_response_time', float('inf')):.2f}秒")
             
-        # 添加所有源到结果中
-        sorted_results.extend(sorted_channels)
+            # 添加所有成功的源到结果中，按速度排序
+            sorted_results.extend(sorted_success)
+            
+            # 记录过滤掉了多少不可用源
+            if failed_channels:
+                logging.info(f"频道 {channel_name} 过滤掉 {len(failed_channels)} 个不可用源")
+        else:
+            logging.warning(f"频道 {channel_name} 没有可用的源！所有 {len(failed_channels)} 个源都测试失败")
+            # 如果没有可用源，保留所有源以防万一
+            sorted_results.extend(channels)
     
-    logging.info(f"FFmpeg测试完成，共测试 {len(results)} 个频道源")
+    logging.info(f"FFmpeg测试完成，共测试 {len(results)} 个频道源，保留 {len(sorted_results)} 个源")
     return sorted_results
 
 
