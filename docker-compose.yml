@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  iptvtest:
+    build: .
+    container_name: iptvtest
+    restart: unless-stopped
+    volumes:
+      - /volume1/docker/iptvtest/config:/app/config
+      - /volume1/docker/iptvtest/output:/app/output
+      - /volume1/docker/iptvtest/logs:/app/logs
+      - /volume1/web/myweb/iptv:/volume1/web/myweb/iptv
+    environment:
+      - TZ=Asia/Shanghai
+      - DISABLE_CRON=false  # 设置为true可禁用定时任务
+    # 可选：手动执行测速
+    # command: full  # 可选值: first_test, http_test, full, shell 
