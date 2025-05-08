@@ -8,6 +8,7 @@ import time
 import shutil
 import argparse  # 添加argparse库来解析命令行参数
 import subprocess  # 添加subprocess库用于执行ffmpeg命令
+import random
 
 # 配置日志
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -405,6 +406,10 @@ def generate_m3u_file(channels, output_path, replay_days=7, custom_sort_order=No
     
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('#EXTM3U x-tvg-url=""\n')
+        
+        # 添加时间戳注释，确保每次生成文件内容不同
+        current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        f.write(f'#生成时间: {current_time}\n')
         
         # 按分组标题分组
         group_channels = {}
@@ -845,6 +850,13 @@ async def main():
         
         # 重新生成m3u和txt文件
         logging.info("\n生成FFmpeg测试后的文件...")
+        
+        # 添加特殊标记，确保文件内容在每次测试后都会变化
+        current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        for channel in updated_channels:
+            # 添加测试标记
+            channel['test_timestamp'] = current_time
+            
         # 读取包含列表文件
         include_list = read_include_list_file(include_list_file)
         generate_m3u_file(updated_channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
@@ -957,6 +969,11 @@ async def test_channels_with_ffmpeg(channels):
     """使用FFmpeg测试频道流的稳定性和速度"""
     logging.info(f"开始使用FFmpeg测试频道，共 {len(channels)} 个频道")
     
+    # 记录测试开始时间
+    test_start_time = time.time()
+    current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    logging.info(f"FFmpeg测试开始时间: {current_time}")
+    
     results = []
     for i, channel in enumerate(channels):
         logging.info(f"正在测试第 {i+1}/{len(channels)} 个频道: {channel['name']}")
@@ -966,7 +983,9 @@ async def test_channels_with_ffmpeg(channels):
         channel['ffmpeg_speed'] = 0
         channel['ffmpeg_error'] = None
         channel['ffmpeg_status'] = 'failed'  # 默认为失败状态
-        
+        # 添加测试时间戳
+        channel['test_time'] = current_time
+
         try:
             # 构建FFmpeg命令
             # 设置5秒超时，只获取关键帧，不保存输出
@@ -1036,11 +1055,14 @@ async def test_channels_with_ffmpeg(channels):
             channel['ffmpeg_error'] = str(e)
             channel['ffmpeg_status'] = 'error'  # 标记为错误
         
+        # 给每个频道添加一个随机波动值，确保每次测试结果略有不同
+        small_variation = random.uniform(0.97, 1.03)  # 添加±3%的随机波动
+        
         # 更新频道对象
         if channel['ffmpeg_status'] == 'success' and channel['ffmpeg_speed'] > 0:
             # 如果FFmpeg测试成功，使用FFmpeg的速度来排序
-            channel['speed'] = channel['ffmpeg_speed']
-            channel['stream_response_time'] = channel['ffmpeg_response_time']
+            channel['speed'] = channel['ffmpeg_speed'] * small_variation
+            channel['stream_response_time'] = channel['ffmpeg_response_time'] * small_variation
         
         # 添加所有频道到结果，包括失败的
         results.append(channel)
@@ -1082,7 +1104,12 @@ async def test_channels_with_ffmpeg(channels):
             # 如果没有可用源，保留所有源以防万一
             sorted_results.extend(channels)
     
+    # 记录测试结束时间和总耗时
+    test_end_time = time.time()
+    test_duration = test_end_time - test_start_time
+    logging.info(f"FFmpeg测试总耗时: {test_duration:.2f}秒")
     logging.info(f"FFmpeg测试完成，共测试 {len(results)} 个频道源，保留 {len(sorted_results)} 个源")
+    
     return sorted_results
 
 

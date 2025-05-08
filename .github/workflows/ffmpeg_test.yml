@@ -147,16 +147,35 @@ jobs:
           # 先拉取最新代码
           git pull --rebase origin main
           
+          # 检查result文件是否有实际内容
+          m3u_size=$(wc -c < "output/result.m3u" || echo "0")
+          txt_size=$(wc -c < "output/result.txt" || echo "0")
+          
+          echo "M3U文件大小: $m3u_size 字节"
+          echo "TXT文件大小: $txt_size 字节"
+          
+          if [ "$m3u_size" -lt "1000" ] || [ "$txt_size" -lt "1000" ]; then
+            echo "警告：生成的文件内容过小，可能测速失败"
+            exit 1
+          fi
+          
+          # 确保文件内容发生变化（在文件末尾添加注释和时间戳）
+          current_time=$(date '+%Y-%m-%d %H:%M:%S')
+          echo "#时间戳: $current_time" >> output/result.m3u
+          echo "时间戳,$current_time" >> output/result.txt
+          
+          # 确保README.md内容发生更改
+          sed -i '/^确保README.md发生更改/d' README.md || true
+          sed -i '/^更新时间:/d' README.md || true
+          echo "确保README.md发生更改" >> README.md
+          echo "更新时间: $current_time" >> README.md
+          
           # 指定要添加的文件
           files_to_add=(
             "output/result.m3u"
             "output/result.txt"
             "README.md"
           )
-          
-          # 确保README.md内容发生更改，添加时间戳
-          echo "确保README.md发生更改" >> README.md
-          echo "更新时间: $(date '+%Y-%m-%d %H:%M:%S')" >> README.md
           
           # 强制添加文件，即使被 .gitignore 忽略
           for file in "${files_to_add[@]}"; do
@@ -170,5 +189,5 @@ jobs:
           
           # 直接提交更改，不再检查是否有差异
           echo "提交更改..."
-          git commit -m "更新 FFmpeg 测速结果 - $(date '+%Y-%m-%d %H:%M:%S')" || echo "没有需要提交的更改"
+          git commit -m "更新 FFmpeg 测速结果 - $current_time" || echo "没有需要提交的更改"
           git push || echo "推送失败或没有更改可推送" 
