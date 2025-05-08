@@ -76,46 +76,86 @@ jobs:
             exit 1
           fi
 
-      - name: 生成 M3U 和 TXT 文件
+      - name: 第一次测速
         run: |
           if [ -f "main.py" ]; then
-            echo "正在运行 main.py 生成 M3U 和 TXT 文件..."
-            pipenv run python main.py 2>&1 | tee main.log
+            echo "正在运行第一次测速..."
+            pipenv run python main.py --first_test 2>&1 | tee first_test.log
             if [ $? -ne 0 ]; then
-              echo "生成 M3U 和 TXT 文件失败。检查 main.py 或依赖项。"
-              echo "查看 main.log 获取详细错误信息:"
-              cat main.log
+              echo "第一次测速失败。检查 main.py 或依赖项。"
+              echo "查看 first_test.log 获取详细错误信息:"
+              cat first_test.log
               exit 1
             fi
-            
-            # 检查所有需要的文件
-            required_files=(
-              "output/result.m3u"
-              "output/result.txt"
-              "output/result_http_test.m3u"
-              "output/result_http_test.txt"
-            )
-            
-            echo "检查生成的文件..."
-            for file in "${required_files[@]}"; do
-              if [ ! -f "$file" ]; then
-                echo "错误: 文件 $file 未生成"
-                echo "当前目录内容:"
-                ls -la
-                echo "output 目录内容:"
-                ls -la output/
-                exit 1
-              else
-                echo "✓ 找到文件 $file"
-                filesize=$(wc -c < "$file")
-                echo "文件大小: $filesize 字节"
-              fi
-            done
           else
             echo "未找到 main.py 文件，当前目录内容:"
             ls -la
             exit 1
           fi
+          
+      - name: 保存第一次测速结果
+        run: |
+          # 检查第一次测速生成的文件
+          required_files=(
+            "output/result.m3u"
+            "output/result.txt"
+          )
+          
+          echo "检查第一次测速生成的文件..."
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "错误: 文件 $file 未生成"
+              echo "当前目录内容:"
+              ls -la
+              echo "output 目录内容:"
+              ls -la output/
+              exit 1
+            else
+              echo "✓ 找到文件 $file"
+              filesize=$(wc -c < "$file")
+              echo "文件大小: $filesize 字节"
+            fi
+          done
+          
+      - name: 第二次测速
+        run: |
+          if [ -f "main.py" ]; then
+            echo "正在运行第二次测速（HTTP测速）..."
+            pipenv run python main.py --http_test 2>&1 | tee http_test.log
+            if [ $? -ne 0 ]; then
+              echo "第二次测速失败。检查 main.py 或依赖项。"
+              echo "查看 http_test.log 获取详细错误信息:"
+              cat http_test.log
+              exit 1
+            fi
+          else
+            echo "未找到 main.py 文件"
+            exit 1
+          fi
+          
+      - name: 保存第二次测速结果
+        run: |
+          # 检查第二次测速生成的文件
+          required_files=(
+            "output/result_http_test.m3u"
+            "output/result_http_test.txt"
+          )
+          
+          echo "检查第二次测速生成的文件..."
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "错误: 文件 $file 未生成"
+              echo "当前目录内容:"
+              ls -la
+              echo "output 目录内容:"
+              ls -la output/
+              exit 1
+            else
+              echo "✓ 找到文件 $file"
+              filesize=$(wc -c < "$file")
+              echo "文件大小: $filesize 字节"
+            fi
+          done
 
       - name: 更新 README
         run: |
