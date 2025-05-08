@@ -38,6 +38,7 @@ ENV/
 .vscode/
 *.swp
 *.swo
+update.sh
 
 # OS specific
 .DS_Store
