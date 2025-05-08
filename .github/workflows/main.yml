@@ -159,6 +159,9 @@ jobs:
 
       - name: 更新 README
         run: |
+          # 移除旧的更新信息
+          sed -i '/## 最新更新信息/,$d' README.md || true
+          
           # 在 README.md 中添加更新信息
           cat << EOF >> README.md
           
