@@ -13,20 +13,36 @@
 - 自动合并相似分组
 
 ### 2. 智能测速
-- 两阶段测速机制：
+- 三阶段测速机制：
   1. 第一阶段：HTTP响应时间测试
      - 测试所有频道的HTTP响应时间
-     - 生成初步测速结果：`result_http_test.m3u`和`result_http_test.txt`
+     - 生成初步测速结果：`first_test.m3u`和`first_test.txt`
   2. 第二阶段：视频流测速
      - 仅对`config/test.txt`中指定的频道进行测速
      - 测试视频流的实际下载速度
      - 生成最终优化结果：`result.m3u`和`result.txt`
+  3. 第三阶段：FFmpeg测试（可选）
+     - 仅对`config/ffmpeg.txt`中指定的频道进行FFmpeg测试
+     - 使用FFmpeg测试视频流的稳定性和播放速度
+     - 根据FFmpeg测试结果重新排序并更新`result.m3u`和`result.txt`
 
 ### 3. 分组管理
 - 支持自定义分组名称映射
 - 自动合并相似分组（如"央视频道"和"CCTV"）
 - 支持排除特定分组
 - 分组内频道智能排序
+
+### 4. FFmpeg测试频道配置（config/ffmpeg.txt）
+```
+湖南都市
+湖南卫视
+湖南娱乐
+湖南电视剧
+```
+- 每行一个频道名称
+- 只有在此列表中的频道才会进行FFmpeg测试
+- FFmpeg测试会检测视频流的稳定性和实际播放速度
+- 测试结果会影响频道排序（播放速度快、稳定性好的排在前面）
 
 ## 配置说明
 
@@ -90,12 +106,14 @@ CCTV-1/CCTV1
    - `config/subscribe.txt`：添加你的IPTV订阅源
    - `config/include_list.txt`：配置需要的分组和频道
    - `config/test.txt`：配置需要测速的频道
+   - `config/ffmpeg.txt`：配置需要FFmpeg测试的频道
 
 ### 2. 自动更新
-- GitHub Actions会在每天凌晨00:00自动运行
-- 每次运行会生成4个文件：
-  - `output/result_http_test.m3u`：第一阶段HTTP测速结果（M3U格式）
-  - `output/result_http_test.txt`：第一阶段HTTP测速结果（TXT格式）
+- GitHub Actions会在每天北京时间12:00自动运行主测速流程
+- 在主测速流程完成后30分钟，会自动运行FFmpeg测试流程
+- 每次运行会生成多个文件：
+  - `output/first_test.m3u`：第一阶段HTTP测速结果（M3U格式）
+  - `output/first_test.txt`：第一阶段HTTP测速结果（TXT格式）
   - `output/result.m3u`：最终优化结果（M3U格式）
   - `output/result.txt`：最终优化结果（TXT格式）
 

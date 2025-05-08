@@ -7,6 +7,7 @@ import re
 import time
 import shutil
 import argparse  # 添加argparse库来解析命令行参数
+import subprocess  # 添加subprocess库用于执行ffmpeg命令
 
 # 配置日志
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -744,12 +745,14 @@ async def main():
     parser = argparse.ArgumentParser(description='IPTV频道测速和整理工具')
     parser.add_argument('--first_test', action='store_true', help='只执行第一次测速（HTTP响应时间测试）')
     parser.add_argument('--http_test', action='store_true', help='只执行第二次测速（视频流测速）')
+    parser.add_argument('--ffmpeg_test', action='store_true', help='使用FFmpeg对指定频道进行测试')
     args = parser.parse_args()
 
     # 设置输入和输出文件路径
     subscribe_file = 'config/subscribe.txt'
     include_list_file = 'config/include_list.txt'
     test_channels_file = 'config/test.txt'
+    ffmpeg_test_file = 'config/ffmpeg.txt'
     
     # 输出文件路径
     output_dir = 'output'
@@ -764,6 +767,60 @@ async def main():
     # 确保输出目录存在
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
+
+    # 如果是FFmpeg测试，只处理result.m3u文件中的指定频道
+    if args.ffmpeg_test:
+        # 读取需要用FFmpeg测试的频道列表
+        ffmpeg_channels = read_include_list_file(ffmpeg_test_file)
+        if not ffmpeg_channels:
+            logging.error("FFmpeg测试频道文件中没有有效的频道名称。")
+            return
+            
+        logging.info("\n==================== FFmpeg测试阶段 ====================")
+        logging.info(f"即将使用FFmpeg测试以下频道：{', '.join(ffmpeg_channels)}")
+        
+        if not os.path.exists(output_m3u):
+            logging.error(f"找不到文件 {output_m3u}，请先运行普通测速生成该文件。")
+            return
+            
+        # 读取现有的m3u文件
+        with open(output_m3u, 'r', encoding='utf-8') as f:
+            m3u_content = f.read()
+            
+        # 解析m3u文件内容
+        channels = parse_m3u_content(m3u_content)
+        
+        # 过滤出需要测试的频道
+        ffmpeg_channel_set = set(ffmpeg_channels)
+        channels_to_test = []
+        
+        for channel in channels:
+            channel_name = channel['name'].split('/')[0].strip()
+            if channel_name in ffmpeg_channel_set:
+                channels_to_test.append(channel)
+                
+        if not channels_to_test:
+            logging.warning("在现有m3u文件中未找到指定的FFmpeg测试频道。")
+            return
+            
+        # 对这些频道进行FFmpeg测试
+        tested_channels = await test_channels_with_ffmpeg(channels_to_test)
+        
+        # 更新原始频道列表中的测试结果
+        tested_dict = {f"{ch['name']}_{ch['url']}": ch for ch in tested_channels}
+        for i, channel in enumerate(channels):
+            channel_key = f"{channel['name']}_{channel['url']}"
+            if channel_key in tested_dict:
+                channels[i] = tested_dict[channel_key]
+        
+        # 重新生成m3u和txt文件
+        logging.info("\n生成FFmpeg测试后的文件...")
+        # 读取包含列表文件
+        include_list = read_include_list_file(include_list_file)
+        generate_m3u_file(channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
+        generate_txt_file(channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
+        logging.info("✅ FFmpeg测试完成，已更新频道测速信息。")
+        return
 
     # 读取订阅文件
     urls = read_subscribe_file(subscribe_file)
@@ -853,6 +910,116 @@ async def main():
         logging.info("✅ 已生成第二阶段测速结果文件：")
         logging.info(f"  - {output_m3u}：视频流测速结果")
         logging.info(f"  - {output_txt}：视频流测速结果（TXT格式）")
+
+
+async def test_channels_with_ffmpeg(channels):
+    """使用FFmpeg测试频道流的稳定性和速度"""
+    logging.info(f"开始使用FFmpeg测试频道，共 {len(channels)} 个频道")
+    
+    results = []
+    for i, channel in enumerate(channels):
+        logging.info(f"正在测试第 {i+1}/{len(channels)} 个频道: {channel['name']}")
+        
+        # 保存原有的测试数据
+        channel['ffmpeg_response_time'] = float('inf')
+        channel['ffmpeg_speed'] = 0
+        channel['ffmpeg_error'] = None
+        
+        try:
+            # 构建FFmpeg命令
+            # 设置5秒超时，只获取关键帧，不保存输出
+            ffmpeg_cmd = [
+                'ffmpeg',
+                '-timeout', '5000000',  # 5秒超时（微秒单位）
+                '-i', channel['url'],
+                '-t', '5',  # 只测试5秒
+                '-c', 'copy',  # 不做转码，只复制流
+                '-f', 'null',  # 输出到空设备
+                '-'
+            ]
+            
+            start_time = time.time()
+            
+            # 执行FFmpeg命令
+            proc = subprocess.Popen(
+                ffmpeg_cmd, 
+                stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE, 
+                text=True
+            )
+            
+            try:
+                # 设置超时
+                stdout, stderr = proc.communicate(timeout=15)  # 15秒总超时
+                
+                # 计算执行时间
+                elapsed_time = time.time() - start_time
+                channel['ffmpeg_response_time'] = elapsed_time
+                
+                # 检查是否有错误输出
+                if proc.returncode != 0:
+                    channel['ffmpeg_error'] = stderr
+                    logging.warning(f"FFmpeg测试返回非零状态码: {proc.returncode}")
+                    logging.debug(f"错误输出: {stderr}")
+                else:
+                    # 解析输出，查找速度信息
+                    speed_pattern = r'speed=\s*([0-9.]+)x'
+                    matches = re.findall(speed_pattern, stderr)
+                    if matches:
+                        # 取最后一个速度值
+                        last_speed = float(matches[-1])
+                        channel['ffmpeg_speed'] = last_speed
+                        logging.info(f"频道 {channel['name']} 的FFmpeg测试速度: {last_speed}x")
+                    else:
+                        logging.warning(f"未能从FFmpeg输出中解析到速度信息")
+                        
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                logging.warning(f"FFmpeg测试超时: {channel['name']}")
+                channel['ffmpeg_error'] = "Timeout after 15 seconds"
+        
+        except Exception as e:
+            logging.error(f"FFmpeg测试异常: {str(e)}")
+            channel['ffmpeg_error'] = str(e)
+        
+        # 更新频道对象
+        if channel['ffmpeg_speed'] > 0:
+            # 如果FFmpeg测试成功，使用FFmpeg的速度来排序
+            channel['speed'] = channel['ffmpeg_speed']
+            channel['stream_response_time'] = channel['ffmpeg_response_time']
+        
+        results.append(channel)
+    
+    # 按频道名称分组
+    grouped_channels = {}
+    for channel in results:
+        channel_name = channel['name'].split('/')[0].strip()
+        if channel_name not in grouped_channels:
+            grouped_channels[channel_name] = []
+        grouped_channels[channel_name].append(channel)
+    
+    # 对每个频道组内的链接按FFmpeg速度排序
+    sorted_results = []
+    for channel_name, channels in grouped_channels.items():
+        # 按FFmpeg速度排序（如果有）
+        sorted_channels = sorted(channels, key=lambda x: (-x.get('ffmpeg_speed', 0), 
+                                                         x.get('ffmpeg_response_time', float('inf')),
+                                                         -x.get('speed', 0), 
+                                                         x.get('stream_response_time', float('inf'))))
+        
+        # 打印最佳源的信息
+        if sorted_channels:
+            best = sorted_channels[0]
+            logging.info(f"频道 {channel_name} 的最佳源:")
+            logging.info(f"  URL: {best['url']}")
+            logging.info(f"  FFmpeg速度: {best.get('ffmpeg_speed', 0):.2f}x")
+            logging.info(f"  FFmpeg响应时间: {best.get('ffmpeg_response_time', float('inf')):.2f}秒")
+            
+        # 添加所有源到结果中
+        sorted_results.extend(sorted_channels)
+    
+    logging.info(f"FFmpeg测试完成，共测试 {len(results)} 个频道源")
+    return sorted_results
 
 
 if __name__ == '__main__':
