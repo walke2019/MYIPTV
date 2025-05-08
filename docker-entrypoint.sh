@@ -10,7 +10,7 @@ if [ "$DISABLE_CRON" != "true" ]; then
     # 创建一个临时的crontab文件
     echo "0 4 * * * cd /app && python main.py --first_test >> /app/logs/first_test.log 2>&1" > /tmp/crontab
     echo "0 5 * * * cd /app && python main.py --http_test >> /app/logs/http_test.log 2>&1" >> /tmp/crontab
-    echo "10 5 * * * cp -f /app/output/result_http_test.* /volume1/web/myweb/iptv/ >> /app/logs/copy.log 2>&1" >> /tmp/crontab
+    echo "10 5 * * * cp -f /app/output/result.* /volume1/web/myweb/iptv/ >> /app/logs/copy.log 2>&1" >> /tmp/crontab
     
     # 安装crontab
     crontab /tmp/crontab
@@ -33,7 +33,7 @@ elif [ "$1" = "http_test" ]; then
     # 复制测速结果到指定目录
     echo "复制测速结果到 /volume1/web/myweb/iptv/ 目录..."
     mkdir -p /volume1/web/myweb/iptv/
-    cp -f /app/output/result_http_test.* /volume1/web/myweb/iptv/
+    cp -f /app/output/result.* /volume1/web/myweb/iptv/
 elif [ "$1" = "full" ]; then
     echo "执行完整测速流程..."
     python main.py
@@ -41,11 +41,20 @@ elif [ "$1" = "full" ]; then
     # 复制测速结果到指定目录
     echo "复制测速结果到 /volume1/web/myweb/iptv/ 目录..."
     mkdir -p /volume1/web/myweb/iptv/
-    cp -f /app/output/result_http_test.* /volume1/web/myweb/iptv/
+    cp -f /app/output/result.* /volume1/web/myweb/iptv/
 elif [ "$1" = "shell" ]; then
     exec /bin/bash
 else
-    # 默认前台运行，保持容器活动
-    echo "容器已启动，定时任务将在后台执行..."
+    # 默认启动时自动执行一次完整测速流程
+    echo "容器已启动，开始执行初始测速..."
+    python main.py
+    
+    # 复制测速结果到指定目录
+    echo "复制测速结果到 /volume1/web/myweb/iptv/ 目录..."
+    mkdir -p /volume1/web/myweb/iptv/
+    cp -f /app/output/result.* /volume1/web/myweb/iptv/
+    
+    echo "初始测速完成，定时任务将在后台继续执行..."
+    # 保持容器运行
     tail -f /dev/null
 fi 

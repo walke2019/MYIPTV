@@ -30,14 +30,11 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* \
     && ln -sf python3 /usr/bin/python
 
-# 安装 pipenv
-RUN pip3 install --no-cache-dir pipenv
-
 # 复制项目文件
 COPY . /app/
 
-# 使用pipenv安装依赖
-RUN pipenv install --deploy --system
+# 安装Python依赖
+RUN pip3 install --no-cache-dir aiohttp asyncio
 
 # 创建用于存储结果和日志的目录
 RUN mkdir -p /app/output /app/logs
