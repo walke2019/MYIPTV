@@ -449,7 +449,7 @@ def generate_m3u_file(channels, output_path, replay_days=7, custom_sort_order=No
                 channel_name = channel['name']
                 # 构建EPG和台标信息
                 # 对于CCTV频道，去掉tvg-id和logo URL中的连字符
-                if channel_name.startswith('CCTV-'):
+                if 'CCTV-' in channel_name:
                     logo_name = channel_name.replace('-', '')
                     tvg_id = logo_name.replace(' ', '_')
                     tvg_logo = f"https://live.izbds.com/logo/{logo_name}.png"
