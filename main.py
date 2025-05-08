@@ -847,6 +847,7 @@ async def main():
         
         # 重新生成m3u和txt文件
         logging.info("\n生成FFmpeg测试后的文件...")
+        logging.info(f"更新后的频道总数: {len(updated_channels)}")
         
         # 添加特殊标记，确保文件内容在每次测试后都会变化
         current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -856,8 +857,22 @@ async def main():
             
         # 读取包含列表文件
         include_list = read_include_list_file(include_list_file)
+        
+        # 确保输出目录存在
+        os.makedirs('output', exist_ok=True)
+        
+        # 生成新文件
         generate_m3u_file(updated_channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
         generate_txt_file(updated_channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
+        
+        # 验证生成的文件
+        if os.path.exists(output_m3u):
+            with open(output_m3u, 'r', encoding='utf-8') as f:
+                content = f.read()
+                logging.info(f"生成的M3U文件大小: {len(content)} 字节")
+                logging.info(f"生成的M3U文件中频道数量: {content.count('#EXTINF')}")
+        else:
+            logging.error(f"未能生成M3U文件: {output_m3u}")
         
         # 输出测试统计信息
         total_tested = len(channels_to_test)
