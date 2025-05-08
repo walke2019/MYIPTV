@@ -405,7 +405,7 @@ def generate_m3u_file(channels, output_path, replay_days=7, custom_sort_order=No
     test_channels_set = set(test_channels)
     
     with open(output_path, 'w', encoding='utf-8') as f:
-        f.write('#EXTM3U x-tvg-url=""\n')
+        f.write('#EXTM3U x-tvg-url="http://epg.51zmt.top:8000/e.xml"\n')
         
         # 添加时间戳注释，确保每次生成文件内容不同
         current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -821,31 +821,28 @@ async def main():
         updated_channels = []
         tested_dict = {f"{ch['name']}_{ch['url']}": ch for ch in tested_channels}
         
-        # 创建一个集合来跟踪哪些频道名称已经通过FFmpeg测试
-        ffmpeg_tested_names = set()
+        # 创建一个字典来存储每个频道名称对应的成功测试通过的频道列表
+        successful_channels_by_name = {}
         for ch in tested_channels:
             if ch.get('ffmpeg_status') == 'success':
-                ffmpeg_tested_names.add(ch['name'].split('/')[0].strip())
+                channel_name = ch['name'].split('/')[0].strip()
+                if channel_name not in successful_channels_by_name:
+                    successful_channels_by_name[channel_name] = []
+                successful_channels_by_name[channel_name].append(ch)
         
         # 处理原始频道列表
         for channel in channels:
             channel_key = f"{channel['name']}_{channel['url']}"
             channel_name = channel['name'].split('/')[0].strip()
             
-            if channel_key in tested_dict:
-                # 这是一个被测试过的频道
-                tested_channel = tested_dict[channel_key]
-                
-                if tested_channel.get('ffmpeg_status') == 'success':
-                    # 测试成功，添加到更新列表
-                    updated_channels.append(tested_channel)
-                    
-            elif channel_name not in ffmpeg_channel_set:
+            if channel_name in ffmpeg_channel_set:
+                # 这是需要测试的频道
+                if channel_key in tested_dict and tested_dict[channel_key].get('ffmpeg_status') == 'success':
+                    # 这个具体的源测试成功了，添加到更新列表
+                    updated_channels.append(tested_dict[channel_key])
+                # 不再保留测试失败的源
+            else:
                 # 这不是我们需要测试的频道，保留原样
-                updated_channels.append(channel)
-            elif channel_name not in ffmpeg_tested_names:
-                # 这是个需要测试但没有通过测试的频道名称，且没有其他成功测试的同名频道
-                # 我们保留它，避免完全删除某个频道
                 updated_channels.append(channel)
         
         # 重新生成m3u和txt文件
