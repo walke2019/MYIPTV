@@ -97,8 +97,8 @@ jobs:
         run: |
           # 检查第一次测速生成的文件
           required_files=(
-            "output/result.m3u"
-            "output/result.txt"
+            "output/first_test.m3u"
+            "output/first_test.txt"
           )
           
           echo "检查第一次测速生成的文件..."
@@ -137,8 +137,8 @@ jobs:
         run: |
           # 检查第二次测速生成的文件
           required_files=(
-            "output/result_http_test.m3u"
-            "output/result_http_test.txt"
+            "output/result.m3u"
+            "output/result.txt"
           )
           
           echo "检查第二次测速生成的文件..."
@@ -170,8 +170,8 @@ jobs:
           - TXT格式：[\`result.txt\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/result.txt)
           
           ### HTTP测速结果
-          - M3U格式：[\`result_http_test.m3u\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/result_http_test.m3u)
-          - TXT格式：[\`result_http_test.txt\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/result_http_test.txt)
+          - M3U格式：[\`first_test.m3u\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/first_test.m3u)
+          - TXT格式：[\`first_test.txt\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/first_test.txt)
           EOF
 
       - name: 提交并推送更改
@@ -182,10 +182,10 @@ jobs:
           
           # 指定要添加的文件
           files_to_add=(
+            "output/first_test.m3u"
+            "output/first_test.txt"
             "output/result.m3u"
             "output/result.txt"
-            "output/result_http_test.m3u"
-            "output/result_http_test.txt"
             "README.md"
           )
           
