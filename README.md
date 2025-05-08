@@ -127,38 +127,17 @@ CCTV-1/CCTV1
 3. 定期检查GitHub Actions运行日志，了解更新状态
 4. 如果需要立即更新，可以手动触发GitHub Actions工作流
 
-## 测试文件信息
-最后更新时间：2025-05-08 02:42:23
-
-### 测试文件列表
-total 8
--rw-r--r-- 1 runner docker  64 May  8 02:42 test1.txt
--rw-r--r-- 1 runner docker 133 May  8 02:42 test2.txt
-
-### 文件内容预览
-#### test1.txt
-```
-这是修改后的测试文件1 - 修改于 2025-05-08 02:42:23
-```
-
-#### test2.txt
-```
-这是测试文件2
-创建时间：2025-05-08 02:42:23
-测试多行内容
-行1
-行2
-行3
-这是追加的内容 - 2025-05-08 02:42:23
-```
 
 ## 最新更新信息
 更新时间：2025-05-08 15:28:35
 
 ### 可用文件
-- M3U格式：[`result.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.m3u)
-- TXT格式：[`result.txt`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.txt)
+M3U格式：
+```
+https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.m3u
+```
+TXT格式：
+```
+https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.txt
+```
 
-### HTTP测速结果
-- M3U格式：[`first_test.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/first_test.m3u)
-- TXT格式：[`first_test.txt`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/first_test.txt)
