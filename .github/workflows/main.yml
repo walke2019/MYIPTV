@@ -151,7 +151,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # 添加所有更改
+          # 重置所有更改
+          git reset
+          
+          # 只添加需要的文件
           git add output/result.m3u
           git add output/result.txt
           git add output/result_http_test.m3u
