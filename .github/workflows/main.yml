@@ -17,84 +17,73 @@ jobs:
       TZ: Asia/Shanghai  # 设置时区为中国时区
 
     steps:
-      - name: Checkout code
+      - name: 检出代码
         uses: actions/checkout@v3
         with:
           fetch-depth: 0  # 获取完整的git历史
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GITHUB_TOKEN 进行认证
-          persist-credentials: true  # 保持认证状态
 
-      - name: Install GitHub CLI
-        run: |
-          type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
-          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
-          && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
-          && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
-          && sudo apt update \
-          && sudo apt install gh -y
-
-      - name: Set up Python
+      - name: 设置 Python 环境
         uses: actions/setup-python@v4
         with:
           python-version: '3.13'
 
-      - name: Check Pipfile format
+      - name: 检查 Pipfile 格式
         run: |
           if [ -f "Pipfile" ]; then
-            echo "Starting to check Pipfile format..."
+            echo "开始检查 Pipfile 格式..."
             pip install toml
             set +e
             python -c "import toml; toml.load(open('Pipfile'))"
             check_status=$?
             set -e
             if [ $check_status -eq 0 ]; then
-              echo "Pipfile format is valid."
+              echo "Pipfile 格式有效。"
             else
-              echo "Pipfile format is invalid. Here is the content of Pipfile:"
+              echo "Pipfile 格式无效。以下是 Pipfile 的内容:"
               cat Pipfile
               exit 1
             fi
           else
-            echo "Pipfile not found in the project directory. Please ensure it exists."
+            echo "在项目目录中未找到 Pipfile。请确保其存在。"
             exit 1
           fi
 
-      - name: Install pipenv
+      - name: 安装 pipenv
         run: |
-          echo "Installing pipenv..."
+          echo "正在安装 pipenv..."
           pip install pipenv
           if [ $? -ne 0 ]; then
-            echo "Failed to install pipenv. Please check the network or Python environment."
+            echo "安装 pipenv 失败。请检查网络或 Python 环境。"
             exit 1
           fi
 
-      - name: Install dependencies
+      - name: 安装依赖项
         run: |
-          echo "Installing project dependencies..."
+          echo "正在安装项目依赖项..."
           pipenv install --deploy
           if [ $? -ne 0 ]; then
-            echo "Failed to install project dependencies. Check Pipfile or network."
+            echo "安装项目依赖项失败。检查 Pipfile 或网络。"
             exit 1
           fi
 
-      - name: Install FFmpeg
+      - name: 安装 FFmpeg
         run: |
-          echo "Installing FFmpeg..."
+          echo "正在安装 FFmpeg..."
           sudo apt-get update
           sudo apt-get install -y ffmpeg
           if [ $? -ne 0 ]; then
-            echo "Failed to install FFmpeg. Check system permissions or network."
+            echo "安装 FFmpeg 失败。检查系统权限或网络。"
             exit 1
           fi
 
-      - name: Generate M3U and TXT files
+      - name: 生成 M3U 和 TXT 文件
         run: |
           if [ -f "main.py" ]; then
-            echo "Running main.py to generate M3U and TXT files..."
+            echo "正在运行 main.py 生成 M3U 和 TXT 文件..."
             pipenv run python main.py 2>&1 | tee main.log
             if [ $? -ne 0 ]; then
-              echo "Failed to generate M3U and TXT files. Check main.py or dependencies."
-              echo "Check main.log for detailed error messages:"
+              echo "生成 M3U 和 TXT 文件失败。检查 main.py 或依赖项。"
+              echo "查看 main.log 获取详细错误信息:"
               cat main.log
               exit 1
             fi
@@ -119,7 +108,7 @@ jobs:
               else
                 echo "✓ 找到文件 $file"
                 filesize=$(wc -c < "$file")
-                echo "文件大小: $filesize bytes"
+                echo "文件大小: $filesize 字节"
               fi
             done
           else
@@ -128,9 +117,9 @@ jobs:
             exit 1
           fi
 
-      - name: Update README
+      - name: 更新 README
         run: |
-          # 在README.md中添加更新信息
+          # 在 README.md 中添加更新信息
           cat << EOF >> README.md
           
           ## 最新更新信息
@@ -145,21 +134,29 @@ jobs:
           - TXT格式：[\`result_http_test.txt\`](https://raw.githubusercontent.com/${{ github.repository }}/main/output/result_http_test.txt)
           EOF
 
-      - name: Commit and Push
+      - name: 提交并推送更改
         run: |
-          # 配置Git
+          # 配置 Git
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # 重置所有更改
-          git reset
+          # 指定要添加的文件
+          files_to_add=(
+            "output/result.m3u"
+            "output/result.txt"
+            "output/result_http_test.m3u"
+            "output/result_http_test.txt"
+            "README.md"
+          )
           
-          # 只添加需要的文件
-          git add output/result.m3u
-          git add output/result.txt
-          git add output/result_http_test.m3u
-          git add output/result_http_test.txt
-          git add README.md
+          # 添加文件
+          for file in "${files_to_add[@]}"; do
+            if [ -f "$file" ]; then
+              git add "$file"
+            else
+              echo "文件 $file 不存在，跳过添加"
+            fi
+          done
           
           # 检查是否有更改需要提交
           if git diff --staged --quiet; then
@@ -167,8 +164,5 @@ jobs:
           else
             echo "提交更改..."
             git commit -m "更新 IPTV 文件和 README - $(date '+%Y-%m-%d %H:%M:%S')"
-            
-            # 使用 GITHUB_TOKEN 进行认证并推送
-            git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-            git push -f origin HEAD:main
+            git push
           fi
