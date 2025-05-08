@@ -129,6 +129,10 @@ jobs:
               echo "✓ 找到文件 $file"
               filesize=$(wc -c < "$file")
               echo "文件大小: $filesize 字节"
+              echo "文件内容预览（前20行）:"
+              head -n 20 "$file"
+              echo "统计湖南都市频道数量:"
+              grep -c "湖南都市" "$file"
             fi
           done
           
