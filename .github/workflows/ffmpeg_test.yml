@@ -83,6 +83,17 @@ jobs:
       - name: 执行 FFmpeg 测速
         run: |
           echo "正在执行 FFmpeg 测速..."
+          echo "当前目录内容:"
+          ls -la
+          echo "config 目录内容:"
+          ls -la config/
+          echo "output 目录内容:"
+          ls -la output/
+          echo "FFmpeg 版本:"
+          ffmpeg -version
+          echo "Python 版本:"
+          python --version
+          echo "开始执行测速..."
           pipenv run python main.py --ffmpeg_test 2>&1 | tee ffmpeg_test.log
           if [ $? -ne 0 ]; then
             echo "FFmpeg 测速失败。检查 main.py 或依赖项。"
@@ -90,6 +101,12 @@ jobs:
             cat ffmpeg_test.log
             exit 1
           fi
+          echo "测速完成，检查生成的文件..."
+          ls -la output/
+          echo "result.m3u 文件内容预览:"
+          head -n 10 output/result.m3u
+          echo "result.txt 文件内容预览:"
+          head -n 10 output/result.txt
 
       - name: 检查测速结果
         run: |
