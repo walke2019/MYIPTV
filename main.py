@@ -405,7 +405,7 @@ def generate_m3u_file(channels, output_path, replay_days=7, custom_sort_order=No
     test_channels_set = set(test_channels)
     
     with open(output_path, 'w', encoding='utf-8') as f:
-        f.write('#EXTM3U x-tvg-url="http://epg.51zmt.top:8000/e.xml"\n')
+        f.write('#EXTM3U x-tvg-url="https://epg.zbds.top/index.php"\n')
         
         # 添加时间戳注释，确保每次生成文件内容不同
         current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
