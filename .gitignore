@@ -24,9 +24,6 @@ var/
 logs/
 *.log
 
-# Output files
-output/
-
 # Docker
 .dockerignore
 .docker/
@@ -45,8 +42,3 @@ ENV/
 # OS specific
 .DS_Store
 Thumbs.db
-
-output/result.m3u
-output/result.txt
-output/result_http_test.m3u
-output/result_http_test.txt
