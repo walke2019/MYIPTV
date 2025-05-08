@@ -154,6 +154,10 @@ jobs:
             "README.md"
           )
           
+          # 确保README.md内容发生更改，添加时间戳
+          echo "确保README.md发生更改" >> README.md
+          echo "更新时间: $(date '+%Y-%m-%d %H:%M:%S')" >> README.md
+          
           # 强制添加文件，即使被 .gitignore 忽略
           for file in "${files_to_add[@]}"; do
             if [ -f "$file" ]; then
@@ -164,11 +168,7 @@ jobs:
             fi
           done
           
-          # 检查是否有更改需要提交
-          if git diff --staged --quiet; then
-            echo "没有需要提交的更改"
-          else
-            echo "提交更改..."
-            git commit -m "更新 FFmpeg 测速结果 - $(date '+%Y-%m-%d %H:%M:%S')"
-            git push
-          fi 
+          # 直接提交更改，不再检查是否有差异
+          echo "提交更改..."
+          git commit -m "更新 FFmpeg 测速结果 - $(date '+%Y-%m-%d %H:%M:%S')" || echo "没有需要提交的更改"
+          git push || echo "推送失败或没有更改可推送" 
