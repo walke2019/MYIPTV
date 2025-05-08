@@ -448,8 +448,14 @@ def generate_m3u_file(channels, output_path, replay_days=7, custom_sort_order=No
             for channel in sorted_group:
                 channel_name = channel['name']
                 # 构建EPG和台标信息
-                tvg_id = channel_name.replace(' ', '_')
-                tvg_logo = f"https://live.izbds.com/logo/{channel_name}.png"
+                # 对于CCTV频道，去掉tvg-id和logo URL中的连字符
+                if channel_name.startswith('CCTV-'):
+                    logo_name = channel_name.replace('-', '')
+                    tvg_id = logo_name.replace(' ', '_')
+                    tvg_logo = f"https://live.izbds.com/logo/{logo_name}.png"
+                else:
+                    tvg_id = channel_name.replace(' ', '_')
+                    tvg_logo = f"https://live.izbds.com/logo/{channel_name}.png"
                 
                 f.write(f'#EXTINF:-1 tvg-id="{tvg_id}" tvg-name="{channel_name}" tvg-logo="{tvg_logo}" group-title="{group_title}",{channel_name}\n')
                 f.write(f'{channel["url"]}\n')
