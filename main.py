@@ -753,10 +753,10 @@ async def main():
     
     # 输出文件路径
     output_dir = 'output'
+    output_first_test_m3u = f'{output_dir}/first_test.m3u'
+    output_first_test_txt = f'{output_dir}/first_test.txt'
     output_m3u = f'{output_dir}/result.m3u'
     output_txt = f'{output_dir}/result.txt'
-    output_http_test_m3u = f'{output_dir}/result_http_test.m3u'
-    output_http_test_txt = f'{output_dir}/result_http_test.txt'
 
     # 自定义排序顺序
     custom_sort_order = ['🍄湖南频道', '🍓央视频道', '🐧卫视频道', '🦄️港·澳·台']
@@ -804,8 +804,8 @@ async def main():
             
             # 保存第一次测速结果（HTTP响应时间测试后）
             filtered_channels_first = filter_channels(unique_channels, include_list)
-            generate_m3u_file(filtered_channels_first, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
-            generate_txt_file(filtered_channels_first, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
+            generate_m3u_file(filtered_channels_first, output_first_test_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
+            generate_txt_file(filtered_channels_first, output_first_test_txt, custom_sort_order=custom_sort_order, include_list=include_list)
             logging.info("✅ 第一阶段测试完成，已保存HTTP响应时间测试结果。")
     
     # 如果是第二次测速或没有指定参数，执行视频流测速
@@ -829,8 +829,8 @@ async def main():
                 
                 # 生成最终的 M3U 和 TXT 文件
                 logging.info("\n生成最终文件（包含测速结果）...")
-                generate_m3u_file(filtered_channels, output_http_test_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
-                generate_txt_file(filtered_channels, output_http_test_txt, custom_sort_order=custom_sort_order, include_list=include_list)
+                generate_m3u_file(filtered_channels, output_m3u, custom_sort_order=custom_sort_order, include_list=include_list)
+                generate_txt_file(filtered_channels, output_txt, custom_sort_order=custom_sort_order, include_list=include_list)
                 logging.info("✅ 第二阶段测试完成，已更新频道测速信息。")
         else:
             logging.warning("⚠️ 未找到需要测速的频道列表，跳过第二阶段测速。")
@@ -839,20 +839,20 @@ async def main():
     if not args.first_test and not args.http_test:
         logging.info("\n==================== 测速任务完成 ====================")
         logging.info("✅ 已生成所有结果文件：")
-        logging.info(f"  - {output_m3u}：第一阶段HTTP测速结果")
-        logging.info(f"  - {output_txt}：第一阶段HTTP测速结果（TXT格式）")
-        logging.info(f"  - {output_http_test_m3u}：第二阶段视频流测速结果")
-        logging.info(f"  - {output_http_test_txt}：第二阶段视频流测速结果（TXT格式）")
+        logging.info(f"  - {output_first_test_m3u}：第一阶段HTTP测速结果")
+        logging.info(f"  - {output_first_test_txt}：第一阶段HTTP测速结果（TXT格式）")
+        logging.info(f"  - {output_m3u}：第二阶段视频流测速结果")
+        logging.info(f"  - {output_txt}：第二阶段视频流测速结果（TXT格式）")
     elif args.first_test:
         logging.info("\n==================== 第一阶段测速任务完成 ====================")
         logging.info("✅ 已生成第一阶段测速结果文件：")
-        logging.info(f"  - {output_m3u}：HTTP响应时间测试结果")
-        logging.info(f"  - {output_txt}：HTTP响应时间测试结果（TXT格式）")
+        logging.info(f"  - {output_first_test_m3u}：HTTP响应时间测试结果")
+        logging.info(f"  - {output_first_test_txt}：HTTP响应时间测试结果（TXT格式）")
     elif args.http_test:
         logging.info("\n==================== 第二阶段测速任务完成 ====================")
         logging.info("✅ 已生成第二阶段测速结果文件：")
-        logging.info(f"  - {output_http_test_m3u}：视频流测速结果")
-        logging.info(f"  - {output_http_test_txt}：视频流测速结果（TXT格式）")
+        logging.info(f"  - {output_m3u}：视频流测速结果")
+        logging.info(f"  - {output_txt}：视频流测速结果（TXT格式）")
 
 
 if __name__ == '__main__':
