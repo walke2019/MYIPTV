@@ -128,18 +128,14 @@ CCTV-1/CCTV1
 4. 如果需要立即更新，可以手动触发GitHub Actions工作流
 
 
+
 ## 最新更新信息
-更新时间：2025-05-08 15:28:35
+更新时间：2025-05-09 12:17:54
 
 ### 可用文件
-M3U格式：
-```
-https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.m3u
-```
-TXT格式：
-```
-https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.txt
-```
+- M3U格式：[`result.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.m3u)
+- TXT格式：[`result.txt`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.txt)
 
-确保README.md发生更改
-更新时间: 2025-05-09 01:18:11
+### HTTP测速结果
+- M3U格式：[`first_test.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/first_test.m3u)
+- TXT格式：[`first_test.txt`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/first_test.txt)
