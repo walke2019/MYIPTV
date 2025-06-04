@@ -1,5 +1,6 @@
 https://cnb.cool/junchao.tang/llive/-/git/raw/main/小云TV直播
 https://raw.githubusercontent.com/pxiptv/live/refs/heads/main/iptv.m3u
+https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/refs/heads/main/bbxx_lite.m3u
 https://raw.githubusercontent.com/wanglu6036/xqgdf/refs/heads/main/qgdf.txt
 https://raw.githubusercontent.com/250992941/iptv/refs/heads/main/st1.txt
 https://raw.githubusercontent.com/pxiptv/live/refs/heads/main/whitelist.txt
