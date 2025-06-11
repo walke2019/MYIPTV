@@ -161,8 +161,9 @@ CCTV-1/CCTV1
 
 
 
+
 ## 最新更新信息
-更新时间：2025-06-10 12:24:02
+更新时间：2025-06-11 12:24:57
 
 ### 可用文件
 - M3U格式：[`result.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.m3u)
@@ -171,5 +172,3 @@ CCTV-1/CCTV1
 ### HTTP测速结果
 - M3U格式：[`first_test.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/first_test.m3u)
 - TXT格式：[`first_test.txt`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/first_test.txt)
-确保README.md发生更改
-更新时间: 2025-06-10 12:52:52
