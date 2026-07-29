@@ -585,4 +585,4 @@ CCTV-1/CCTV1
 - M3U格式：[`first_test.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/first_test.m3u)
 - TXT格式：[`first_test.txt`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/first_test.txt)
 确保README.md发生更改
-更新时间: 2026-07-29 14:27:54
+更新时间: 2026-07-29 15:23:39
