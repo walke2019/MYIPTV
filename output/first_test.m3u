@@ -1,5 +1,5 @@
 #EXTM3U x-tvg-url="https://epg.zbds.top/index.php"
-#生成时间: 2026-09-18 16:38:41
+#生成时间: 2026-09-19 16:25:34
 #EXTINF:-1 tvg-id="湖南都市" tvg-name="湖南都市" tvg-logo="https://live.izbds.com/logo/湖南都市.png" group-title="🍄湖南频道",湖南都市
 http://tvgslb.hn.chinamobile.com:8089/180000001002/00000001000000000099000000195952/main.m3u8?stbid=
 #EXTINF:-1 tvg-id="湖南都市" tvg-name="湖南都市" tvg-logo="https://live.izbds.com/logo/湖南都市.png" group-title="🍄湖南频道",湖南都市
@@ -349,9 +349,9 @@ http://tvgslb.hn.chinamobile.com:8089/180000001002/00000001000000000099000000197
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV-3" tvg-logo="https://live.izbds.com/logo/CCTV3.png" group-title="🍓央视频道",CCTV-3
 http://tvgslb.hn.chinamobile.com:8089/180000001002/00000001000000000008000000047455/main.m3u8?stbid=
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV-3" tvg-logo="https://live.izbds.com/logo/CCTV3.png" group-title="🍓央视频道",CCTV-3
-http://222.169.85.8:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV-3" tvg-logo="https://live.izbds.com/logo/CCTV3.png" group-title="🍓央视频道",CCTV-3
 http://112.30.73.119:229/tsfile/live/0003_2.m3u8?key=txiptv&playlive=0&authid=0
+#EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV-3" tvg-logo="https://live.izbds.com/logo/CCTV3.png" group-title="🍓央视频道",CCTV-3
+http://222.169.85.8:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV-3" tvg-logo="https://live.izbds.com/logo/CCTV3.png" group-title="🍓央视频道",CCTV-3
 http://39.134.61.219/PLTV/88888888/224/3221227141/index.m3u8
 #EXTINF:-1 tvg-id="CCTV3" tvg-name="CCTV-3" tvg-logo="https://live.izbds.com/logo/CCTV3.png" group-title="🍓央视频道",CCTV-3
@@ -590,8 +590,6 @@ http://tvgslb.hn.chinamobile.com:8089/180000001002/00000001000000000008000000047
 http://tvgslb.hn.chinamobile.com:8089/180000001002/00000000000000020000000000182561/main.m3u8?stbid=
 #EXTINF:-1 tvg-id="CCTV5+" tvg-name="CCTV-5+" tvg-logo="https://live.izbds.com/logo/CCTV5+.png" group-title="🍓央视频道",CCTV-5+
 http://112.30.73.119:9901/tsfile/live/0005_2.m3u8?key=txiptv&playlive=0&authid=0
-#EXTINF:-1 tvg-id="CCTV5+" tvg-name="CCTV-5+" tvg-logo="https://live.izbds.com/logo/CCTV5+.png" group-title="🍓央视频道",CCTV-5+
-http://223.78.65.165:9901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="CCTV5+" tvg-name="CCTV-5+" tvg-logo="https://live.izbds.com/logo/CCTV5+.png" group-title="🍓央视频道",CCTV-5+
 http://39.134.61.218/PLTV/88888888/224/3221226900/index.m3u8
 #EXTINF:-1 tvg-id="CCTV5+" tvg-name="CCTV-5+" tvg-logo="https://live.izbds.com/logo/CCTV5+.png" group-title="🍓央视频道",CCTV-5+
@@ -1807,9 +1805,11 @@ http://223.159.8.53:8099/tsfile/live/0107_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://live.izbds.com/logo/东方卫视.png" group-title="🐧卫视频道",东方卫视
 http://tvgslb.hn.chinamobile.com:8089/180000001002/00000000000000020000000000182568/main.m3u8?stbid=
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://live.izbds.com/logo/东方卫视.png" group-title="🐧卫视频道",东方卫视
+http://bp-resource-dfl.bestv.cn/155/3/video.m3u8
+#EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://live.izbds.com/logo/东方卫视.png" group-title="🐧卫视频道",东方卫视
 https://txmov2.a.kwimgs.com/bs3/video-hls/5219953535631090825_hlsb.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://live.izbds.com/logo/东方卫视.png" group-title="🐧卫视频道",东方卫视
-http://bp-resource-dfl.bestv.cn/155/3/video.m3u8
+http://bp-resource-dfl.bestv.cn/148/3/video.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://live.izbds.com/logo/东方卫视.png" group-title="🐧卫视频道",东方卫视
 http://hwottcdn.ln.chinamobile.com/PLTV/11/224/3221227476/index.m3u8
 #EXTINF:-1 tvg-id="东方卫视" tvg-name="东方卫视" tvg-logo="https://live.izbds.com/logo/东方卫视.png" group-title="🐧卫视频道",东方卫视
@@ -1879,13 +1879,13 @@ http://106.115.121.233:9901/tsfile/live/1036_1.m3u8?key=txiptv&playlive=1&authid
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://live.izbds.com/logo/浙江卫视.png" group-title="🐧卫视频道",浙江卫视
 http://tvgslb.hn.chinamobile.com:8089/180000001002/00000000000000020000000000182563/main.m3u8?stbid=
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://live.izbds.com/logo/浙江卫视.png" group-title="🐧卫视频道",浙江卫视
+http://ali-m-l.cztv.com:80/channels/lantian/channel001/1080p.m3u8
+#EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://live.izbds.com/logo/浙江卫视.png" group-title="🐧卫视频道",浙江卫视
 http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://live.izbds.com/logo/浙江卫视.png" group-title="🐧卫视频道",浙江卫视
-http://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8
+https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8?
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://live.izbds.com/logo/浙江卫视.png" group-title="🐧卫视频道",浙江卫视
 http://ali-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8
-#EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://live.izbds.com/logo/浙江卫视.png" group-title="🐧卫视频道",浙江卫视
-https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8?
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://live.izbds.com/logo/浙江卫视.png" group-title="🐧卫视频道",浙江卫视
 http://hwottcdn.ln.chinamobile.com/PLTV/11/224/3221227485/index.m3u8
 #EXTINF:-1 tvg-id="浙江卫视" tvg-name="浙江卫视" tvg-logo="https://live.izbds.com/logo/浙江卫视.png" group-title="🐧卫视频道",浙江卫视
@@ -2344,6 +2344,8 @@ http://182.117.136.42:9901/tsfile/live/0143_1.m3u8?key=txiptv&playlive=1&authid=
 http://223.159.8.53:8099/tsfile/live/0143_1.m3u8?key=txiptv&playlive=0&authid=0
 #EXTINF:-1 tvg-id="黑龙江卫视" tvg-name="黑龙江卫视" tvg-logo="https://live.izbds.com/logo/黑龙江卫视.png" group-title="🐧卫视频道",黑龙江卫视
 http://tvgslb.hn.chinamobile.com:8089/180000001002/00000000000000020000000000182571/main.m3u8?stbid=
+#EXTINF:-1 tvg-id="黑龙江卫视" tvg-name="黑龙江卫视" tvg-logo="https://live.izbds.com/logo/黑龙江卫视.png" group-title="🐧卫视频道",黑龙江卫视
+https://idclive.hljtv.com:4430/live/hljws_own.m3u8
 #EXTINF:-1 tvg-id="黑龙江卫视" tvg-name="黑龙江卫视" tvg-logo="https://live.izbds.com/logo/黑龙江卫视.png" group-title="🐧卫视频道",黑龙江卫视
 http://39.134.61.218/PLTV/88888888/224/3221227171/index.m3u8
 #EXTINF:-1 tvg-id="黑龙江卫视" tvg-name="黑龙江卫视" tvg-logo="https://live.izbds.com/logo/黑龙江卫视.png" group-title="🐧卫视频道",黑龙江卫视
@@ -2877,8 +2879,6 @@ http://219.145.43.42:9901/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://live.izbds.com/logo/吉林卫视.png" group-title="🐧卫视频道",吉林卫视
 http://tvgslb.hn.chinamobile.com:8089/180000001002/00000000000000020000000000182264/main.m3u8?stbid=
 #EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://live.izbds.com/logo/吉林卫视.png" group-title="🐧卫视频道",吉林卫视
-http://221.7.175.154:8445/tsfile/live/1014_1.m3u8?key=txiptv&playlive=1&authid=0
-#EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://live.izbds.com/logo/吉林卫视.png" group-title="🐧卫视频道",吉林卫视
 http://39.134.61.218/PLTV/88888888/224/3221227242/index.m3u8
 #EXTINF:-1 tvg-id="吉林卫视" tvg-name="吉林卫视" tvg-logo="https://live.izbds.com/logo/吉林卫视.png" group-title="🐧卫视频道",吉林卫视
 http://111.170.157.210:1081/?id=947472500&auth=95d4c11f9a4bc430bf05d5da4ace7ccbb1bfa486255bd6ee26781d4a54826e72ba587256974f975189d6139b6ace3e88
@@ -3101,9 +3101,9 @@ http://123.189.36.86:9901/tsfile/live/1059_1.m3u8?key=txiptv&playlive=1&authid=0
 #EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://live.izbds.com/logo/宁夏卫视.png" group-title="🐧卫视频道",宁夏卫视
 http://tvgslb.hn.chinamobile.com:8089/180000001002/00000000000000020000000000182273/main.m3u8?stbid=
 #EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://live.izbds.com/logo/宁夏卫视.png" group-title="🐧卫视频道",宁夏卫视
-https://live.264788.xyz/channel/ningxiaweishi?streamid=e1236348f815c36a0429357e5b5c5f10&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
-#EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://live.izbds.com/logo/宁夏卫视.png" group-title="🐧卫视频道",宁夏卫视
 https://live.264788.xyz/channel/ningxiaweishi?streamid=551474d02bee1c160e1692e22c45ddba&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
+#EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://live.izbds.com/logo/宁夏卫视.png" group-title="🐧卫视频道",宁夏卫视
+https://live.264788.xyz/channel/ningxiaweishi?streamid=e1236348f815c36a0429357e5b5c5f10&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
 #EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://live.izbds.com/logo/宁夏卫视.png" group-title="🐧卫视频道",宁夏卫视
 https://live.264788.xyz/channel/ningxiaweishi?streamid=1b2952717a920173e66d4a348f9dcb5c&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
 #EXTINF:-1 tvg-id="宁夏卫视" tvg-name="宁夏卫视" tvg-logo="https://live.izbds.com/logo/宁夏卫视.png" group-title="🐧卫视频道",宁夏卫视
