@@ -653,8 +653,9 @@ CCTV-1/CCTV1
 
 
 
+
 ## 最新更新信息
-更新时间：2026-10-16 16:39:18
+更新时间：2026-10-17 16:10:30
 
 ### 可用文件
 - M3U格式：[`result.m3u`](https://raw.githubusercontent.com/walke2019/MYIPTV/main/output/result.m3u)
